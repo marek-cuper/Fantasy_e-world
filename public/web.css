@@ -1,0 +1,586 @@
+
+.icon{
+    display: none;
+    position: absolute;
+    color: #111111;
+    font-size: 2.5em;
+    margin: 3vh;
+}
+.fa-bars{    display: block;
+    position: absolute;
+    color: #111111;
+
+}
+.sidenav{
+    height: 100%;
+    width: 12%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 3vh;
+    border: 1px solid #818181;
+}
+
+.sidenav a {
+    padding: 0.2vh 0.2vh 0.2vh 3vh;
+    text-decoration: none;
+    font-size: 2.5vh;
+    color: #818181;
+    display: block;
+    transition: 0.4s;
+    margin-top: 4vh;
+    margin-bottom: 4vh;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.middleNav {
+    display: none;
+    text-align: center;
+    height: 60%;
+    width: 60%;
+    top: 15%;
+    left: 20%;
+    position: fixed;
+    z-index: 1;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 3vh;
+    border: 1px solid #818181;
+}
+
+.middleNav a {
+
+    padding: 0.2vh 0.2vh 0.2vh 0.2vh;
+    text-decoration: none;
+    font-size: 2.5vh;
+    color: #818181;
+    display: block;
+    transition: 0.4s;
+    margin-bottom: 2vh;
+
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #d9d9d9;
+    opacity: 0.6;
+    color: black;
+    text-align: center;
+    font-size: 2vh;
+}
+
+
+.flex-container {
+
+    margin-left: 10%;
+    margin-bottom: 1vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    scale: 1;
+}
+.flex-container div{
+    margin-left: 1vh;
+    margin-right: 1vh;
+    height: 3vh;
+}
+.flex-container div .footerExplanations{
+    float: left;
+}
+.flex-container div .footerValue{
+    margin-right: 1vh;
+    float: right;
+}
+.footerValue img{
+    width: 4vh;
+    height: 4vh;
+}
+
+.flex-container div {
+    margin: 0.5vh;
+}
+.flex-container div progress{
+    margin-top: 4%;
+}
+
+.wholePage{
+    position:fixed;
+    padding:0;
+    margin:0;
+
+    top:0;
+    left:0;
+
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+
+    text-align: center;
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+
+}
+.chat-box {
+    top: 15%;
+
+    color: white;
+    background-color: rgba(17, 17, 17, 0.82);
+    overflow-x: hidden;
+    padding-top: 3vh;
+    border: 5px solid #818181;
+    margin-left: 15%;
+}
+
+/*Train*/
+.trainBox {
+    display: block;
+    text-align: center;
+    height: 60%;
+    width: 60%;
+    top: 15%;
+    left: 20%;
+    position: fixed;
+
+    background-color: rgba(17, 17, 17, 0.82);
+    overflow-x: hidden;
+    padding-top: 3vh;
+    border: 5px solid #818181;
+    margin-left: 10vh;
+}
+
+.trainBox div {
+
+    text-align: center;
+    text-decoration: none;
+    font-size: 3vh;
+    color: #818181;
+    display: block;
+    margin: 4vh auto;
+}
+.trainBox button{
+    scale: 1.25;
+}
+
+table{
+    overflow:scroll;
+    text-align: center;
+    left: 50%;
+    width: 50vh;
+    margin: 0;
+}
+.table-stats{
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+/*Login*/
+.loginnav {
+    overflow: hidden;
+    background-color: #111;
+    border: 1px solid #818181;
+}
+
+.loginnav a {
+    float: left;
+    display: block;
+    color: #818181;
+    text-align: center;
+    padding: 0.4vh 0.4vh;
+    text-decoration: none;
+    font-size: 2vh;
+    margin-left: 5vh;
+    margin-right: 5vh;
+
+}
+
+.loginnav a:hover {
+    background-color: gray;
+    color: black;
+}
+
+.loginnav a.active {
+    background-color: #2196F3;
+    color: white;
+}
+
+.loginnav .login-box {
+    margin-left: 5vh;
+    margin-right: 5vh;
+    float: right;
+}
+
+.loginnav input {
+    padding: 0.5vh 0.8vh;
+    margin-top: 0.4vh;
+    font-size: 2.5vh;
+    border: none;
+    width: 25vh;
+}
+
+.loginnav .login-box button {
+    float: right;
+    padding: 0.5vh 0.8vh;
+    margin-top: 0.25vh;
+
+    background-color: #555;
+    color: white;
+    font-size: 2.8vh;
+    border: none;
+    cursor: pointer;
+    margin-right: 3vh;
+}
+
+.loginnav .login-box button:hover {
+    background-color: green;
+}
+.loginnav p {
+    color: #bbbbbb;
+
+}
+
+.regBox{
+
+    display: block;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: black;
+    /*background-color: #818181;*/
+
+    border: 5px solid #818181;
+    min-height: 35vh;
+    min-width: 35vh;
+    margin-left: 3vh;
+
+    opacity: 0.9;
+    color: #818181;
+    font-size: 2vh;
+    scale: 1.15;
+}
+.regBox div{
+    text-align: center;
+    margin: 3vh;
+    scale: 1.25;
+}
+
+.regBox input{
+    font-size: 2vh;
+}
+.regBox input .checkbox{
+    width: 5vh;
+    height: 5vh;
+}
+
+.regBox div:last-child{
+    margin: 5vh;
+}
+
+.regBox button{
+    font-size: 3vh;
+}
+.regBox p {
+    font-size: 1.5vh;
+    color: #bbbbbb;
+
+}
+.login-box {
+    scale: 1.15;
+    margin: 10px;
+
+}
+.navName{
+    scale: 1.5;
+    margin: 10px;
+}
+
+/*Weapon*/
+.weapon-container {
+    text-align: center;
+    width: 80%;
+    height: 50%;
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+}
+
+.weapons-box{
+    display: flex;
+    justify-content: center;
+    height: 80%;
+    margin-left: 15%;
+}
+
+.slideshow-container {
+    width: 40%;
+    height: 90%;
+    justify-content: center;
+    display: flex;
+    position: relative;
+    margin-left: 5%;
+    margin-right: 5%;
+    background-color: rgba(17, 17, 17, 0.82);
+    border: 5px solid #818181;
+}
+.slideshow-container img{
+    max-width: 200%;
+    max-height: 200%;
+}
+
+
+/* Hide the images by default */
+.slide {
+    display: block;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+    width: 150%;
+    display: block;
+    cursor: pointer;
+    margin-top: 220%;
+    color: #818181;
+    font-size: 5vh;
+    user-select: none;
+    background-color: rgba(17, 17, 17, 0.82);
+    border: 5px solid #818181;
+}
+
+/* Position the "next button" to the right */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+    color: #f2f2f2;
+    font-size: 25px;
+    /*margin-top: 20%;*/
+    text-align: center;
+}
+.dots{
+    margin-left: 15%;
+}
+.player_weapon{
+    margin-left: 15%;
+
+}
+
+.player_weapon_button{
+    margin-left: 15%;
+}
+.player_weapon_button button{
+    margin-bottom: 5%;
+    width: 25%;
+    height: 15%;
+    font-size: 3vh;
+    border: 3px solid #818181;
+    background-color: rgba(17, 17, 17, 0.82);
+    color: #818181;
+    font-family: monospace;
+}
+
+.player_weapon img{
+    background-color: rgba(17, 17, 17, 0.82);
+    border: 3px solid #818181;
+    max-width: 40%;
+    max-height: 40%;
+}
+
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 1vh;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.active, .dot:hover {
+    background-color: #717171;
+}
+
+/*Settings*/
+
+.settings_container {
+    text-align: center;
+    width: 80%;
+    height: 50%;
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+}
+
+.settingsBox{
+    margin-left: 10vh;
+
+    display: block;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: black;
+    /*background-color: #818181;*/
+
+    border: 5px solid #818181;
+    min-height: 35vh;
+    min-width: 35vh;
+    /*margin-left: 3vh;*/
+
+    opacity: 0.9;
+    color: #818181;
+    font-size: 2vh;
+    scale: 1.15;
+}
+.settingsBox div{
+    text-align: center;
+    margin: 1.5vh;
+    scale: 1.25;
+}
+
+.settingsBox input{
+    font-size: 1.5vh;
+}
+.settingsBox input .checkbox{
+    width: 5vh;
+    height: 5vh;
+}
+
+.settingsBox div:last-child{
+    margin: 3.5vh;
+}
+
+.settingsBox button{
+    font-size: 1.5vh;
+}
+
+@media screen and (max-width: 1200px), (max-height: 800px) {
+
+    .sidenav{
+        display: none
+    }
+
+    .flex-container {
+        flex-direction: column;
+        position: center;
+        margin: 0 0 2.5vh;
+    }
+    .icon{
+        display: block;
+    }
+    .chat-box{
+        margin-left: 0;
+    }
+    .trainBox {
+        margin: 0;
+    }
+
+    /*Login page*/
+    .topnav .login-container {
+        float: none;
+    }
+    .topnav a, .topnav input[type=text], .topnav .login-container button {
+        float: none;
+        display: block;
+        text-align: left;
+        width: 100%;
+        margin: 0;
+        padding: 14px;
+    }
+    .topnav input[type=text] {
+        border: 1px solid #ccc;
+    }
+
+    .regBox{
+        margin-top: 10vh;
+    }
+    button {
+        text-align: center;
+    }
+
+    /*Weapons*/
+
+    .weapon-container {
+        width: 120%;
+        height: 50%;
+        position: absolute;
+        left: 50%;
+        top: 34%;
+    }
+    .weapon-container img{
+        width: 120px;
+        height: 120px;
+    }
+    .slideshow-container {
+        height: 70%;
+    }
+
+    .weapons-box{
+        margin-left: 0;
+    }
+    .text {
+        font-size: 12px;
+    }
+    .dots, .player_weapon_button, .player_weapon{
+        margin-left: 0;
+    }
+
+    .dot {
+        cursor: pointer;
+        height: 10px;
+        width: 10px;
+    }
+    .player_weapon_button button{
+        font-size: 2vh;
+    }
+    /*Settings*/
+    .settingsBox{
+        margin-left: 5%;
+    }
+
+
+}
+li{
+    font-family: monospace;
+    padding: 1vh 1vh 2vh 2vh;
+    font-size: 3vh;
+}
+a{
+    font-family: monospace;
+}
+p{
+    font-family: monospace;
+    font-size: 2vh;
+}
+td{
+    font-family: monospace;
+}
+
+
