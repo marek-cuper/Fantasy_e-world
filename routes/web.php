@@ -24,5 +24,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['middleware' => ['auth']], function (){
     Route::resource('user', \App\Http\Controllers\UserController::class);
+    Route::resource('weapon', \App\Http\Controllers\WeaponController::class);
 });
 

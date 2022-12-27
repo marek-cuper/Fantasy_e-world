@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use Aginev\Datagrid\Datagrid;
-
 use App\Models\User;
 use App\Models\Weapon;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class WeaponController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,22 +16,23 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = \App\Models\User::paginate(10);
+        $weapons = Weapon::all();
 
-        $grid = new Datagrid($users, $request->get('f', []));
+        $grid = new Datagrid($weapons, $request->get('f', []));
 
-        $grid->setColumn('name', 'Full name')->setColumn('level', 'Level');
+        $grid->setColumn('id', 'id')->setColumn('name', 'Name');
 
-        return view('user.index', ['grid' => $grid]);
+        return view('weapon.index', ['grid' => $grid]);
     }
 
-//    public function getWeapomImagePath()
-//    {
-//        $object = new WeaponController();
-//
-//        return $object->getWeapom()->get('image_path');
-//    }
 
+//    public function getWeapom()
+//    {
+//        $user = Auth::user();
+//        $weapon = Weapon::find($user->get('weapon'));
+//
+//        return $weapon;
+//    }
     /**
      * Show the form for creating a new resource.
      *

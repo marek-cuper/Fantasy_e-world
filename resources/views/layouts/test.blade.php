@@ -35,7 +35,7 @@
     <div class="sidenav">
         <a href="{{ url('/home') }}">Home</a>
         <a href="#">Character</a>
-        <a href="#">Weapon</a>
+        <a href="{{ route('weapon.index') }}" >{{ __('Weapon') }}</a>
         <a href="#">Train</a>
         <a href="#">Work</a>
         <a href="{{ route('user.index') }}" >{{ __('Statistic') }}</a>
@@ -52,7 +52,7 @@
     <div class="middleNav" id="middleNav">
         <a href="{{ url('/home') }}">Home</a>
         <a href="#">Character</a>
-        <a href="#">Weapon</a>
+        <a href="{{ route('weapon.index') }}" >{{ __('Weapon') }}</a>
         <a href="#">Train</a>
         <a href="#">Work</a>
         <a href="{{ route('user.index') }}" >{{ __('Statistic') }}</a>
@@ -84,7 +84,8 @@
             <div>
                 <div class="footerExplanations"><p>Weapon:</p></div>
                 <div class="footerValue">
-                    {{ Auth::user()->weapon}}
+                    <img src="{{  \App\Models\Weapon::where('id', Auth::user()->weapon)->value('image_path') }}">
+
                 </div>
 
             </div>
