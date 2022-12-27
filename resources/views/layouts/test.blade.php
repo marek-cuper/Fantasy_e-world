@@ -40,7 +40,6 @@
         <a href="#">Work</a>
         <a href="{{ route('user.index') }}" >{{ __('Statistic') }}</a>
         <a href="#">Settings</a>
-
         <a  href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             {{ __('Logout') }}
         </a>
@@ -51,14 +50,19 @@
     </div>
 
     <div class="middleNav" id="middleNav">
-        <a href="homePage.php">Home</a>
+        <a href="{{ url('/home') }}">Home</a>
         <a href="#">Character</a>
-        <a href="weaponPage.php">Weapon</a>
-        <a href="trainPage.html">Train</a>
+        <a href="#">Weapon</a>
+        <a href="#">Train</a>
         <a href="#">Work</a>
-        <a href="#">Statistic</a>
-        <a href="settingsPage.php">Settings</a>
-        <a href="includes/logout.inc.php">Logout</a>
+        <a href="{{ route('user.index') }}" >{{ __('Statistic') }}</a>
+        <a href="#">Settings</a>
+        <a  href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            {{ __('Logout') }}
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+        </form>
     </div>
 
     <a href="javascript:void(0);" class="icon" onclick="myFunction()">
@@ -80,7 +84,7 @@
             <div>
                 <div class="footerExplanations"><p>Weapon:</p></div>
                 <div class="footerValue">
-                    {{ Auth::user()->email }}
+                    {{ Auth::user()->weapon}}
                 </div>
 
             </div>

@@ -481,6 +481,21 @@ table{
     font-size: 1.5vh;
 }
 
+/*statistics*/
+.statistics {
+    background-color: #bbbbbb;
+    width: 90%;
+    max-height: 525px;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.statistics:nth-child {
+    color: #818181;
+    font-size: 5vh;
+    background-color: rgba(17, 17, 17, 0.82);
+}
+
+
 @media screen and (max-width: 1200px), (max-height: 800px) {
 
     .sidenav{

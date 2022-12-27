@@ -1,21 +1,16 @@
-@extends('layouts.app')
+@extends('layouts.test')
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">{{ __('Users') }}</div>
-
-                    <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-                        {!! $grid->show() !!}
-                    </div>
+        <div class="chat-box">
+            @if (session('status'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('status') }}
                 </div>
+            @endif
+            <div class="statistics">
+                <p>{!! $grid->show() !!}</p>
+
             </div>
         </div>
     </div>

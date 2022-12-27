@@ -15,11 +15,11 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = \App\Models\User::paginate(25);
+        $users = \App\Models\User::paginate(10);
 
         $grid = new Datagrid($users, $request->get('f', []));
 
-        $grid->setColumn('name', 'Full name')->setColumn('email', 'Email address');
+        $grid->setColumn('name', 'Full name')->setColumn('level', 'Level');
 
         return view('user.index', ['grid' => $grid]);
     }
