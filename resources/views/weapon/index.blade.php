@@ -2,94 +2,75 @@
 
 @section('content')
     <div class="weapon-container">
-        <!--    <div class="galleryWeaponsBox">-->
-        <!--      <div class="imageWeapons">-->
-        <!--        <div>-->
-        <!--          <img src="images/weapons/axes.png"/>-->
-        <!--        </div>-->
-        <!--        <div>-->
-        <!--          <img src="images/weapons/shadow_staff.png"/>-->
-        <!--        </div>-->
-        <!--        <div>-->
-        <!--          <img src="images/weapons/torch.png"/>-->
-        <!--        </div>-->
-        <!--        <div>-->
-        <!--          <img src="images/weapons/shaman_staff.png"/>-->
-        <!--        </div>-->
-        <!--        <div>-->
-        <!--          <img src="images/weapons/crossbow.png"/>-->
-        <!--        </div>-->
-        <!--        <div>-->
-        <!--          <img src="images/weapons/scythe.png"/>-->
-        <!--        </div>-->
-        <!--        <div>-->
-        <!--          <img src="images/weapons/arcane_staff.png"/>-->
-        <!--        </div>-->
-        <!--        <div>-->
-        <!--          <img src="images/weapons/daggers.png"/>-->
-        <!--        </div>-->
-        <!--      </div>-->
-        <!--    </div>-->
         <div class="dots">
-            <!--            --><?php
-//            for ($i = 1; $i <= 5; $i++) {
-//                ?>
-                <!--                <span class="dot" onclick="currentSlide($i)"></span>;-->
-            <!--                --><?php
-//            }
-//            ?>
-            <span class="dot" onclick="currentSlide(1)"></span>
-            <span class="dot" onclick="currentSlide(2)"></span>
-            <span class="dot" onclick="currentSlide(3)"></span>
-            <span class="dot" onclick="currentSlide(4)"></span>
-            <span class="dot" onclick="currentSlide(5)"></span>
+
+            {{ $weps->count() }}
+
+            <?php
+
+            for ($i = 1; $i <= $weps->count(); $i++) {
+                ?>
+                    <span class="dot" onclick="currentSlide($i)"></span>
+                <?php
+            }
+            ?>
         </div>
 
         <div class="weapons-box">
             <div><a class="prev" onclick="plusSlides(-1)">&#10094;</a></div>
 
-            <div class="slideshow-container">
+            <div class="slideshow-container" id="slideshow-container">
+
+                <?php
+
+                for ($i = 1; $i <= $weps->count(); $i++) {
+                    ?>
 
                 <div class="slide">
-                    <img src="images/weapons/stone.png">
-                    <div class="text">Stone, it is just stone, what do you expect?</div>
+                    <img src="{{  $weps->where('id', $i)->value('image_path') }}">
+                    <div class="text">{{  $weps->where('id', $i)->value('info') }}</div>
                 </div>
+                    <?php
+                }
+                ?>
 
-                <div class="slide">
-                    <img src="images/weapons/shadow_staff.png">
-                    <div class="text">Shadow stuff, every action spawn monster</div>
-                </div>
-
-                <div class="slide">
-                    <img src="images/weapons/daggers.png">
-                    <div class="text">Daggers, bonus on every action in Invisbility</div>
-                </div>
-
-                <div class="slide">
-                    <img src="images/weapons/axes.png">
-                    <div class="text">Axes, bonus attack after every action</div>
-                </div>
-
-                <div class="slide">
-                    <img src="images/weapons/torch.png">
-                    <div class="text">Torch, </div>
-                </div>
             </div>
 
             <div><a class="next" onclick="plusSlides(1)">&#10095;</a></div>
 
         </div>
-        <div class="player_weapon_button" type="submit" name="submit" action="includes/weapon.inc.php" method="post" onclick="chooseWeapon()">
+        <div id="weaponSubmit" class="player_weapon_button">
             <button>Choose weapon</button>
         </div>
 
         <div class="player_weapon">
-            <img id="player_weapon_image" src="{{  \App\Models\Weapon::where('id', Auth::user()->weapon)->value('image_path') }}">
+            <img id="player_weapon_image" src="{{  $weps->where('id', Auth::user()->weapon)->value('image_path') }}">
         </div>
 
 
     </div>
+
     <script>
+
+        {{--let listWeps = {{ $weps->toArray() }};--}}
+        {{--for (i = 0; i < listWeps.length(); i++) {--}}
+            // var tree = document.createDocumentFragment();
+            // var div = document.createElement("div");
+            // div.setAttribute('class','slide');
+            //
+            // var img = document.createElement("img");
+            // img.setAttribute('src',listWeps[i].find('image_path'));
+            //
+            // var divText = document.createElement("div");
+            // divText.setAttribute('class','text');
+            //
+            //
+            // tree.appendChild(div)
+            // div.appendChild(img)
+            // div.appendChild(divText)
+            // document.getElementById("slideshow-container").appendChild(tree);
+        // }
+
         let slideIndex = 1;
         showSlides(slideIndex);
 
@@ -121,10 +102,44 @@
 
         function chooseWeapon(){
 
-            var before = "images/weapons/"
-            var imageLookup = ["stone.png", "shadow_staff.png", "daggers.png", "axes.png", "torch.png"];
-            var link = before + imageLookup[slideIndex - 1];
-            document.getElementById("player_weapon_image").src = link;
+            // var before = "images/weapons/"
+            // var imageLookup = ["stone.png", "shadow_staff.png", "daggers.png", "axes.png", "torch.png"];
+            // var link = before + imageLookup[slideIndex - 1];
+            // document.getElementById("player_weapon_image").src = link;
+            {{--$.ajax({--}}
+            {{--    type: "POST",--}}
+            {{--    url: 'setWeapon', // This is what I have updated--}}
+            {{--    data: {--}}
+            {{--        _token: "{{ csrf_token() }}",--}}
+            {{--        id: slideIndex },--}}
+            {{--    success: function() {--}}
+            {{--        alert( slideIndex );--}}
+            {{--    }--}}
+            {{--})--}}
+
+            {{--Query(document).ready(function(){--}}
+            {{--    jQuery('#weaponSubmit').click(function(e){--}}
+            {{--        e.preventDefault();--}}
+            {{--        $.ajaxSetup({--}}
+            {{--            headers: {--}}
+            {{--                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')--}}
+            {{--            }--}}
+            {{--        });--}}
+            {{--        jQuery.ajax({--}}
+            {{--            url: "{{ url('/setWeapon') }}",--}}
+            {{--            method: 'post',--}}
+            {{--            data: {--}}
+            {{--                id: slideIndex,--}}
+            {{--            },--}}
+            {{--            success: function(result){--}}
+            {{--                console.log(result);--}}
+            {{--            }});--}}
+            {{--    });--}}
+            {{--});--}}
+
+
+
+{{--            {{\App\Models\Weapon::where('id', $slideIndex)->value("info")}}--}}
         }
 
 

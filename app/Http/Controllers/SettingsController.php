@@ -2,35 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Aginev\Datagrid\Datagrid;
-use App\Models\User;
-use App\Models\Weapon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class WeaponController extends Controller
+class SettingsController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $weps = \App\Models\Weapon::all();
-//        $wep = $this->getWeapom();
-        return view('weapon.index', compact('weps'));
+        return view('settings');
     }
 
-
-    public function getWeapom()
-    {
-        $user = Auth::user();
-        $weapon = Weapon::where('id', $user->get('weapon'));
-
-        return $weapon;
-    }
     /**
      * Show the form for creating a new resource.
      *

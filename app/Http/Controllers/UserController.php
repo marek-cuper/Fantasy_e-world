@@ -7,6 +7,8 @@ use Aginev\Datagrid\Datagrid;
 use App\Models\User;
 use App\Models\Weapon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -17,20 +19,24 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+
         $users = \App\Models\User::paginate(10);
 
         $grid = new Datagrid($users, $request->get('f', []));
 
         $grid->setColumn('name', 'Full name')->setColumn('level', 'Level');
 
-        return view('user.index', ['grid' => $grid]);
+        $weps = \App\Models\Weapon::all();
+
+        return view('user.index', ['grid' => $grid, 'weps' => $weps]);
     }
 
-//    public function getWeapomImagePath()
+//    public function getPlayerName()
 //    {
-//        $object = new WeaponController();
 //
-//        return $object->getWeapom()->get('image_path');
+//        $name = Auth::user()->name;
+//        return $name;
+//
 //    }
 
     /**

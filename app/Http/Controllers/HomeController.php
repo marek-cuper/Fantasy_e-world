@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+//        $wep = \App\Models\Weapon::where('id', Auth::user()->weapon);
+//        return view('home', compact('wep'));
+        $weps = \App\Models\Weapon::all();
+        return view('home', compact('weps'));
+//        return view('home');
     }
 }

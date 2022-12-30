@@ -18,12 +18,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/settings', [App\Http\Controllers\SettingsController::class, 'index'])->name('settings');
 
 Route::group(['middleware' => ['auth']], function (){
     Route::resource('user', \App\Http\Controllers\UserController::class);
     Route::resource('weapon', \App\Http\Controllers\WeaponController::class);
+    Route::post('/setWeapon','\App\Http\Controllers\WeaponController@setWeapon');
 });
 
