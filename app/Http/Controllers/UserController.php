@@ -9,6 +9,7 @@ use App\Models\Weapon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
@@ -19,16 +20,20 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-
         $users = \App\Models\User::paginate(10);
 
         $grid = new Datagrid($users, $request->get('f', []));
 
         $grid->setColumn('name', 'Full name')->setColumn('level', 'Level');
 
-        $weps = \App\Models\Weapon::all();
+//        $weps = \App\Models\Weapon::all();
+//        return view('user.index', ['grid' => $grid, 'weps' => $weps]);
+        return view('user.index', ['grid' => $grid]);
+    }
 
-        return view('user.index', ['grid' => $grid, 'weps' => $weps]);
+    public function settings()
+    {
+        return view('settings');
     }
 
 //    public function getPlayerName()
@@ -86,22 +91,47 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function changePassword(Request $request)
     {
-        //
+        $user = Auth::user();
+        $hasher = app('hash');
+        if ($hasher->check($request->oldPassword, $user->password)) {
+
+            if($request->newPassword == $request->confirmPassword){
+                $user->password = $hasher->make($request->newPassword);
+                $user->save();
+                Auth::logout();
+                return Redirect()->route('login');
+            }
+
+        } else {
+            $text = 'Wrong password';
+            return Redirect()->route('settings');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function delete(Request $request)
     {
-        //
+        $user = Auth::user();
+        $hasher = app('hash');
+        if ($hasher->check($request->password, $user->password)) {
+            Auth::logout();
+
+            if ($user->delete()) {
+
+                return Redirect()->route('login');
+            }
+        } else {
+            $text = 'Wrong password';
+            return Redirect()->route('settings',['deleteaccount' => $text]);
+        }
+
     }
 }

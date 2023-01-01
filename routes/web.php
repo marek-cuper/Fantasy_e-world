@@ -21,12 +21,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/settings', [App\Http\Controllers\SettingsController::class, 'index'])->name('settings');
-
 Route::group(['middleware' => ['auth']], function (){
     Route::resource('user', \App\Http\Controllers\UserController::class);
     Route::resource('weapon', \App\Http\Controllers\WeaponController::class);
-    Route::post('/setWeapon','\App\Http\Controllers\WeaponController@setWeapon');
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/settings', [App\Http\Controllers\UserController::class, 'settings'])->name('settings');
+    Route::post('/changePassword',[\App\Http\Controllers\UserController::class,'changePassword'])->name('changePassword');
+    Route::delete('/delete', [App\Http\Controllers\UserController::class, 'delete'])->name('delete');
+    Route::post('/setWeapon',[\App\Http\Controllers\WeaponController::class,'setWeapon'])->name('setWeapon');
+
 });
 

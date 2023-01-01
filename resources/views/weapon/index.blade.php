@@ -4,8 +4,6 @@
     <div class="weapon-container">
         <div class="dots">
 
-            {{ $weps->count() }}
-
             <?php
 
             for ($i = 1; $i <= $weps->count(); $i++) {
@@ -40,7 +38,7 @@
 
         </div>
         <div id="weaponSubmit" class="player_weapon_button">
-            <button>Choose weapon</button>
+            <button onclick="chooseWeapon()" >Choose weapon</button>
         </div>
 
         <div class="player_weapon">
@@ -116,29 +114,20 @@
             {{--        alert( slideIndex );--}}
             {{--    }--}}
             {{--})--}}
-
-            {{--Query(document).ready(function(){--}}
-            {{--    jQuery('#weaponSubmit').click(function(e){--}}
-            {{--        e.preventDefault();--}}
-            {{--        $.ajaxSetup({--}}
-            {{--            headers: {--}}
-            {{--                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')--}}
-            {{--            }--}}
-            {{--        });--}}
-            {{--        jQuery.ajax({--}}
-            {{--            url: "{{ url('/setWeapon') }}",--}}
-            {{--            method: 'post',--}}
-            {{--            data: {--}}
-            {{--                id: slideIndex,--}}
-            {{--            },--}}
-            {{--            success: function(result){--}}
-            {{--                console.log(result);--}}
-            {{--            }});--}}
-            {{--    });--}}
-            {{--});--}}
-
-
-
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "{{ url('/setWeapon') }}",
+                type: "post",
+                data: {id: slideIndex,},
+                success: function(){ // What to do if we succeed
+                    var img = document.getElementById("player_weapon_image");
+                    img.src = {{  \App\Models\Weapon::where('id', 1)->value('image_path') }};
+                }
+            });
 {{--            {{\App\Models\Weapon::where('id', $slideIndex)->value("info")}}--}}
         }
 

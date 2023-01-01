@@ -10,19 +10,30 @@
                     <div>
                         <p>Changing password</p>
                     </div>
-                    <form action="" method="post">
+                    <form action="{{ route('changePassword') }}" method="post">
                         <div>
-                            <input type="password" placeholder="Old password" id="oldpsw" name="oldpsw" required>
+                            <input id="oldPassword" type="password" placeholder="Old password" name="oldPassword" @error('password') is-invalid @enderror" required autocomplete="new-password">
+                            @error('password')
+                            <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                            @enderror
                         </div>
                         <div>
-                            <input type="password" placeholder="New password" id="newpsw1" name="newpsw1" required>
+                            <input id="newPassword" type="password" placeholder="New password" name="newPassword" @error('password') is-invalid @enderror" required autocomplete="new-password">
+                            @error('password')
+                            <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                            @enderror
                         </div>
                         <div>
-                            <input type="password" placeholder="Repeat new password" id="newpsw2" name="newpsw2" required>
+                            <input id="confirmPassword" type="password" placeholder="Confirm password" name="confirmPassword" required autocomplete="new-password">
                         </div>
                         <div>
                             <button type="submit" name="submit" >Change password</button>
                         </div>
+                        @csrf @method('POST')
                     </form>
 
 
@@ -30,13 +41,28 @@
                         <p>Delete account</p>
                     </div>
 
-                    <form action="" method="post">
+                    <form action="{{ route('delete') }}" method="post">
                         <div>
-                            <input type="password" placeholder="Password" id="psw" name="psw" required>
+                            <input id="password" type="password" placeholder="Password" @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                            @error('password')
+                            <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                            @enderror
                         </div>
+                        @if(Route::has('deleteaccount'))
+                            <p>
+                                <?php
+                                echo $deleteaccount
+                                ?>
+                            </p>
+
+{{--                            <p>{{ $deleteaccount }}</p>--}}
+                        @endif
                         <div>
                             <button type="submit" name="submit" >Delete account</button>
                         </div>
+                        @csrf @method('DELETE')
                     </form>
                 </div>
             </div>

@@ -18,7 +18,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-{{--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>--}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+
 
 
     <style>
@@ -78,24 +80,25 @@
         @yield('content')
     </main>
 
-    <div class="footer">
-        <div class="flex-container">
-            <div>
-                <div class="footerExplanations"><p>Player Name:</p></div>
-                <div class="footerValue">
-                    {{ Auth::user()->name }}
-                </div>
-            </div>
-            <div>
-                <div class="footerExplanations"><p>Weapon:</p></div>
-                <div class="footerValue">
+{{--    <div class="footer">--}}
+{{--        <div class="flex-container">--}}
+{{--            <div>--}}
+{{--                <div class="footerExplanations"><p>Player Name:</p></div>--}}
+{{--                <div class="footerValue">--}}
+{{--                    {{ Auth::user()->name }}--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div>--}}
+{{--                <div class="footerExplanations"><p>Weapon:</p></div>--}}
+{{--                <div class="footerValue">--}}
 {{--                    <img src="{{  \App\Models\Weapon::where('id', Auth::user()->weapon)->value('image_path') }}">--}}
-                    <img src="{{  $weps->value('image_path') }}">
-                </div>
+{{--                    <img src="{{  $weps->value('image_path') }}">--}}
+{{--                </div>--}}
 
-            </div>
-        </div>
-    </div>
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+
     <script>
         function myFunction() {
             var x = document.getElementById("middleNav");
