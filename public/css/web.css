@@ -341,6 +341,7 @@ table{
     background-color: rgba(17, 17, 17, 0.82);
     border: 5px solid #818181;
 }
+
 .slideshow-container img{
     max-width: 200%;
     max-height: 200%;
@@ -425,6 +426,32 @@ table{
 .active, .dot:hover {
     background-color: #717171;
 }
+
+/*Scroll*/
+.scroll-box{
+    display: flex;
+    justify-content: center;
+    margin-left: 15%;
+}
+
+.scroll-container {
+    width: 80%;
+    height: 30%;
+    justify-content: center;
+    display: flex;
+    position: relative;
+    margin-left: 5%;
+    margin-right: 5%;
+    background-color: rgba(17, 17, 17, 0.82);
+    border: 5px solid #818181;
+}
+
+.scroll-container img{
+    max-width: 200%;
+    max-height: 200%;
+}
+
+
 
 /*Settings*/
 
@@ -575,6 +602,19 @@ table{
     .player_weapon_button button{
         font-size: 2vh;
     }
+
+    /*Scroll*/
+
+
+    .scroll-container img{
+        width: 100px;
+        height: 100px;
+    }
+
+    .scroll-box{
+        margin-left: 0;
+    }
+
     /*Settings*/
     .settingsBox{
         margin-left: 5%;

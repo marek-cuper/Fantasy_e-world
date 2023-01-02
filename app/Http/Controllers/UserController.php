@@ -99,6 +99,11 @@ class UserController extends Controller
         $hasher = app('hash');
         if ($hasher->check($request->oldPassword, $user->password)) {
 
+            $request->validate([
+                'newPassword' => 'string|min:6|confirmed',
+
+            ]);
+
             if($request->newPassword == $request->confirmPassword){
                 $user->password = $hasher->make($request->newPassword);
                 $user->save();

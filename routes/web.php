@@ -24,6 +24,7 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function (){
     Route::resource('user', \App\Http\Controllers\UserController::class);
     Route::resource('weapon', \App\Http\Controllers\WeaponController::class);
+    Route::resource('scroll', \App\Http\Controllers\ScrollController::class);
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/settings', [App\Http\Controllers\UserController::class, 'settings'])->name('settings');
     Route::post('/changePassword',[\App\Http\Controllers\UserController::class,'changePassword'])->name('changePassword');
