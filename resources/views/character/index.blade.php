@@ -1,12 +1,12 @@
 @extends('layouts.test')
 
 @section('content')
-    <div class="weapon-container">
+    <div class="character-container">
         <div class="dots">
 
             <?php
 
-            for ($i = 0; $i < $weps->count(); $i++) {
+            for ($i = 0; $i < $chars->count(); $i++) {
                 ?>
                     <span class="dot" onclick="currentSlide($i)"></span>
                 <?php
@@ -21,12 +21,12 @@
 
                 <?php
 
-                for ($i = 0; $i < $weps->count(); $i++) {
+                for ($i = 0; $i < $chars->count(); $i++) {
                     ?>
 
                 <div class="slide">
-                    <img src="{{  $weps->where('id', $i)->value('image_path') }}">
-                    <div class="text">{{  $weps->where('id', $i)->value('info') }}</div>
+                    <img src="{{  $chars->where('id', $i)->value('image_path') }}">
+                    <div class="text">{{  $chars->where('id', $i)->value('name') }}</div>
                 </div>
                     <?php
                 }
@@ -38,36 +38,17 @@
 
         </div>
         <div id="weaponSubmit" class="player_weapon_button">
-            <button onclick="chooseWeapon()" >Choose weapon</button>
+            <button onclick="chooseCharacter()" >Choose character</button>
         </div>
 
         <div class="player_weapon">
-            <img id="player_weapon_image" src="{{  $weps->where('id', Auth::user()->weapon)->value('image_path') }}">
+            <img id="player_weapon_image" src="{{  $chars->where('id', Auth::user()->character)->value('image_path') }}">
         </div>
 
 
     </div>
 
     <script>
-
-        {{--let listWeps = {{ $weps->toArray() }};--}}
-        {{--for (i = 0; i < listWeps.length(); i++) {--}}
-            // var tree = document.createDocumentFragment();
-            // var div = document.createElement("div");
-            // div.setAttribute('class','slide');
-            //
-            // var img = document.createElement("img");
-            // img.setAttribute('src',listWeps[i].find('image_path'));
-            //
-            // var divText = document.createElement("div");
-            // divText.setAttribute('class','text');
-            //
-            //
-            // tree.appendChild(div)
-            // div.appendChild(img)
-            // div.appendChild(divText)
-            // document.getElementById("slideshow-container").appendChild(tree);
-        // }
 
         let slideIndex = 1;
         showSlides(slideIndex);
@@ -98,34 +79,18 @@
             dots[slideIndex-1].className += " active";
         }
 
-        function chooseWeapon(){
+        function chooseCharacter(){
 
-            // var before = "images/weapons/"
-            // var imageLookup = ["stone.png", "shadow_staff.png", "daggers.png", "axes.png", "torch.png"];
-            // var link = before + imageLookup[slideIndex - 1];
-            // document.getElementById("player_weapon_image").src = link;
-            {{--$.ajax({--}}
-            {{--    type: "POST",--}}
-            {{--    url: 'setWeapon', // This is what I have updated--}}
-            {{--    data: {--}}
-            {{--        _token: "{{ csrf_token() }}",--}}
-            {{--        id: slideIndex },--}}
-            {{--    success: function() {--}}
-            {{--        alert( slideIndex );--}}
-            {{--    }--}}
-            {{--})--}}
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
             $.ajax({
-                url: "{{ url('/setWeapon') }}",
+                url: "{{ url('/setCharacter') }}",
                 type: "post",
                 data: {id: slideIndex - 1},
                 success: function(){ // What to do if we succeed
-                    var img = document.getElementById("player_weapon_image");
-                    img.src = {{  \App\Models\Weapon::where('id', 1)->value('image_path') }};
                 }
             });
 {{--            {{\App\Models\Weapon::where('id', $slideIndex)->value("info")}}--}}

@@ -38,9 +38,22 @@
             <div><a class="next" onclick="plusSlides(1)">&#10095;</a></div>
 
         </div>
-{{--        <div id="weaponSubmit" class="player_weapon_button">--}}
-{{--            <button onclick="chooseWeapon()" >Choose weapon</button>--}}
-{{--        </div>--}}
+
+        <div class="scroll-box">
+            <div id="scrollSubmit" class="player_scroll_button">
+                <button onclick="chooseWeapon()" >Choose 1. scroll</button>
+            </div>
+
+            <div id="scrollSubmit" class="player_scroll_button">
+                <button onclick="chooseWeapon()" >Choose 2. scroll</button>
+            </div>
+
+            <div id="scrollSubmit" class="player_scroll_button">
+                <button onclick="chooseWeapon()" >Choose 3. scroll</button>
+            </div>
+        </div>
+
+
 
         <div class="scroll-box">
             <div class="scroll-container">

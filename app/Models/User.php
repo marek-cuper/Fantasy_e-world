@@ -23,6 +23,7 @@ class User extends Authenticatable
         'email',
         'password',
         'level',
+        'character',
         'weapon',
         'scroll1',
         'scroll2',

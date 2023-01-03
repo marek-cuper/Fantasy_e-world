@@ -312,6 +312,32 @@ table{
     margin: 10px;
 }
 
+/*Character*/
+
+.character-container {
+    text-align: center;
+    width: 80%;
+    height: 60%;
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+}
+.character-container .weapons-box img {
+    margin-top: 10%;
+}
+.character-container img {
+    width: 230px;
+    height: 230px;
+}
+.player_scroll_button button{
+    margin-bottom: 5%;
+    border: 3px solid #818181;
+    background-color: rgba(17, 17, 17, 0.82);
+    color: #818181;
+    font-family: monospace;
+}
+
 /*Weapon*/
 .weapon-container {
     text-align: center;
@@ -434,6 +460,8 @@ table{
     margin-left: 15%;
 }
 
+
+
 .scroll-container {
     width: 80%;
     height: 30%;
@@ -452,6 +480,13 @@ table{
 }
 
 
+.scroll-box button{
+    width: 217px;
+    height: 80px;
+    font-size: 2vh;
+
+
+}
 
 /*Settings*/
 
@@ -567,6 +602,14 @@ table{
         text-align: center;
     }
 
+    /*Characters*/
+    .character-container .slideshow-container {
+        width: 60%;
+    }
+    .character-container img {
+        width: 120px;
+        height: 120px;
+    }
     /*Weapons*/
 
     .weapon-container {

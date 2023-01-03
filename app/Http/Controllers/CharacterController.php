@@ -2,29 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Weapon;
+use App\Models\Character;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class WeaponController extends Controller
+class CharacterController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
-        $weps = Weapon::all();
-//        $wep = $this->getWeapom();
-        return view('weapon.index', ['weps' => $weps, ]);
+        $chars = Character::all();
+        return view('character.index', ['chars' => $chars, ]);
     }
 
-
-
-    public function setWeapon(Request $request){
-        Auth::user()->weapon = $request->id;
+    public function setCharacter(Request $request){
+        Auth::user()->character = $request->id;
         Auth::user()->save();
         $this->index();
     }
