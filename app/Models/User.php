@@ -22,12 +22,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'level',
         'character',
-        'weapon',
-        'scroll1',
-        'scroll2',
-        'scroll3',
+
     ];
 
     /**

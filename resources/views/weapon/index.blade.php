@@ -25,7 +25,7 @@
                     ?>
 
                 <div class="slide">
-                    <img src="{{  $weps->where('id', $i)->value('image_path') }}">
+                    <img id="{{ $i }}" src="{{  $weps->where('id', $i)->value('image_path') }}">
                     <div class="text">{{  $weps->where('id', $i)->value('info') }}</div>
                 </div>
                     <?php
@@ -37,37 +37,25 @@
             <div><a class="next" onclick="plusSlides(1)">&#10095;</a></div>
 
         </div>
+        <div  class="player_weapon">
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+            </label>
+        </div>
+
         <div id="weaponSubmit" class="player_weapon_button">
             <button onclick="chooseWeapon()" >Choose weapon</button>
         </div>
 
         <div class="player_weapon">
-            <img id="player_weapon_image" src="{{  $weps->where('id', Auth::user()->weapon)->value('image_path') }}">
+            <img id="player_weapon_image" src="{{$weps->where('id', $character->value('picture'))->value('image_path') }}">
         </div>
 
 
     </div>
 
     <script>
-
-        {{--let listWeps = {{ $weps->toArray() }};--}}
-        {{--for (i = 0; i < listWeps.length(); i++) {--}}
-            // var tree = document.createDocumentFragment();
-            // var div = document.createElement("div");
-            // div.setAttribute('class','slide');
-            //
-            // var img = document.createElement("img");
-            // img.setAttribute('src',listWeps[i].find('image_path'));
-            //
-            // var divText = document.createElement("div");
-            // divText.setAttribute('class','text');
-            //
-            //
-            // tree.appendChild(div)
-            // div.appendChild(img)
-            // div.appendChild(divText)
-            // document.getElementById("slideshow-container").appendChild(tree);
-        // }
 
         let slideIndex = 1;
         showSlides(slideIndex);
@@ -99,21 +87,8 @@
         }
 
         function chooseWeapon(){
+            {{--const arrayNames = {{ $weps-> }}--}}
 
-            // var before = "images/weapons/"
-            // var imageLookup = ["stone.png", "shadow_staff.png", "daggers.png", "axes.png", "torch.png"];
-            // var link = before + imageLookup[slideIndex - 1];
-            // document.getElementById("player_weapon_image").src = link;
-            {{--$.ajax({--}}
-            {{--    type: "POST",--}}
-            {{--    url: 'setWeapon', // This is what I have updated--}}
-            {{--    data: {--}}
-            {{--        _token: "{{ csrf_token() }}",--}}
-            {{--        id: slideIndex },--}}
-            {{--    success: function() {--}}
-            {{--        alert( slideIndex );--}}
-            {{--    }--}}
-            {{--})--}}
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -125,10 +100,9 @@
                 data: {id: slideIndex - 1},
                 success: function(){ // What to do if we succeed
                     var img = document.getElementById("player_weapon_image");
-                    img.src = {{  \App\Models\Weapon::where('id', 1)->value('image_path') }};
+                    img.src = document.getElementById(slideIndex - 1).src;
                 }
             });
-{{--            {{\App\Models\Weapon::where('id', $slideIndex)->value("info")}}--}}
         }
 
 

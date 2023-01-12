@@ -26,8 +26,6 @@ class UserController extends Controller
 
         $grid->setColumn('name', 'Full name')->setColumn('level', 'Level');
 
-//        $weps = \App\Models\Weapon::all();
-//        return view('user.index', ['grid' => $grid, 'weps' => $weps]);
         return view('user.index', ['grid' => $grid]);
     }
 

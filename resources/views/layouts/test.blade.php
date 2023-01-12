@@ -41,9 +41,11 @@
 @auth
     <div class="sidenav">
         <a href="{{ url('/home') }}">Home</a>
-        <a href="{{ route('character.index') }}" >{{ __('Character') }}</a>
-        <a href="{{ route('weapon.index') }}" >{{ __('Weapon') }}</a>
-        <a href="{{ route('scroll.index') }}" >{{ __('Scroll') }}</a>
+        <a href="{{ url('/character') }}" >{{ __('Characters') }}</a>
+        @if(Auth::user()->character == true)
+            <a href="{{ route('weapon.index') }}" >{{ __('Weapon') }}</a>
+            <a href="{{ route('scroll.index') }}" >{{ __('Scroll') }}</a>
+        @endif
         <a href="{{ route('user.index') }}" >{{ __('Statistic') }}</a>
         <a href="{{ route('settings') }}" >{{ __('Settings') }}</a>
         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -57,9 +59,11 @@
 
     <div class="middleNav" id="middleNav">
         <a href="{{ url('/home') }}">Home</a>
-        <a href="{{ route('character.index') }}" >{{ __('Character') }}</a>
-        <a href="{{ route('weapon.index') }}" >{{ __('Weapon') }}</a>
-        <a href="{{ route('scroll.index') }}" >{{ __('Scroll') }}</a>
+        <a href="{{ url('/character') }}" >{{ __('Characters') }}</a>
+        @if(Auth::user()->character == true)
+            <a href="{{ route('weapon.index') }}" >{{ __('Weapon') }}</a>
+            <a href="{{ route('scroll.index') }}" >{{ __('Scroll') }}</a>
+        @endif
         <a href="{{ route('user.index') }}" >{{ __('Statistic') }}</a>
         <a href="{{ route('settings') }}" >{{ __('Settings') }}</a>
         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Character;
+use App\Models\Characters;
+use App\Models\Character_picture;
+use http\Client\Curl\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,11 +17,43 @@ class CharacterController extends Controller
      */
     public function index()
     {
-        $chars = Character::all();
-        return view('character.index', ['chars' => $chars, ]);
+        $chars = Character_picture::all();
+
+        if (Auth::user()->character == false){
+            return view('character.newCharacter', ['chars' => $chars, ]);
+        } else{
+            $character = Characters::where('user_id', Auth::user()->id);
+            return view('character.index', ['chars' => $chars,'character'=> $character, ]);
+        }
+
     }
 
-    public function setCharacter(Request $request){
+    public function createCharacter(Request $request)
+    {
+        $chars = Characters::all();
+        $user = Auth::user();
+        if($user->character == false){
+            if (!$chars->contains('name' ,$request->name)){
+                $character = new Characters;
+                $character->user_id = $user->id;
+                $character->name = $request->name;
+                $character->level = 1;
+                $character->picture = $request->id;
+                $character->weapon = 0;
+                $character->scroll1 = 0;
+                $character->scroll2 = 0;
+                $character->scroll3 = 0;
+                $character->save();
+                $user->character = true;
+                $user->save();
+            }
+        }
+        return $this->index();
+
+    }
+
+
+    public function setCharacterPicture(Request $request){
         Auth::user()->character = $request->id;
         Auth::user()->save();
         $this->index();
@@ -84,10 +118,17 @@ class CharacterController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function destroy($id)
+    public function deleteCharacter(Request $request)
     {
-        //
+        $user = Auth::user();
+        if ($user->character == 1){
+            Characters::where('user_id', Auth::user()->id)->delete();
+
+            $user->character = false;
+            $user->save();
+        }
+        return $this->index();
     }
 }

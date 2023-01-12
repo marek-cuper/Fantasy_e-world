@@ -27,11 +27,14 @@ Route::group(['middleware' => ['auth']], function (){
     Route::resource('weapon', \App\Http\Controllers\WeaponController::class);
     Route::resource('scroll', \App\Http\Controllers\ScrollController::class);
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::post('/setCharacter',[\App\Http\Controllers\CharacterController::class,'setCharacter'])->name('setCharacter');
+    Route::post('/setCharacterPicture',[\App\Http\Controllers\CharacterController::class, 'setCharacterPicture'])->name('setCharacterPicture');
+    Route::post('/createCharacter',[\App\Http\Controllers\CharacterController::class,'createCharacter'])->name('createCharacter');
     Route::post('/setWeapon',[\App\Http\Controllers\WeaponController::class,'setWeapon'])->name('setWeapon');
+    Route::post('/setScroll',[\App\Http\Controllers\ScrollController::class,'setScroll'])->name('setScroll');
     Route::get('/settings', [App\Http\Controllers\UserController::class, 'settings'])->name('settings');
     Route::post('/changePassword',[\App\Http\Controllers\UserController::class,'changePassword'])->name('changePassword');
     Route::delete('/delete', [App\Http\Controllers\UserController::class, 'delete'])->name('delete');
+    Route::delete('/deleteCharacter', [App\Http\Controllers\CharacterController::class, 'deleteCharacter'])->name('deleteCharacter');
 
 });
 

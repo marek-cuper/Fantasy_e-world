@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Characters;
 use App\Models\Weapon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,17 +17,20 @@ class WeaponController extends Controller
      */
     public function index()
     {
-        $weps = Weapon::all();
-//        $wep = $this->getWeapom();
-        return view('weapon.index', ['weps' => $weps, ]);
+        $character = Characters::where('user_id', Auth::user()->id);
+        if(Auth::user()->name == "admin"){
+            $weps = Weapon::all();
+        }else{
+            $weps = Weapon::where('playable', 'true');
+        }
+
+        return view('weapon.index', ['weps' => $weps, 'character'=> $character,]);
     }
 
 
 
     public function setWeapon(Request $request){
-        Auth::user()->weapon = $request->id;
-        Auth::user()->save();
-        $this->index();
+        Characters::where('user_id', Auth::user()->id)->update(['weapon' => $request->id]);
     }
 
     /**
