@@ -31,7 +31,7 @@ class WeaponController extends Controller
         return view('weapon.index', ['weps' => $weps, 'character'=> $character,]);
     }
 
-    public function changePlayability(Request $request){
+    public function changePlayabilityWeapon(Request $request){
         if(Weapon::where('id', $request->id)->value('playable') == '1'){
             Weapon::where('id', $request->id)->update(['playable' => '0']);
             $this->setPlayableWeapon($request->id);
@@ -39,13 +39,11 @@ class WeaponController extends Controller
         }else{
             Weapon::where('id', $request->id)->update(['playable' => '1']);
         }
-
     }
 
 //  Function is made for set playable weapon
     public function setPlayableWeapon(int $id){
-        $wepid = Weapon::where('playable', 1)->first()->id;
-        Characters::where('weapon', $id)->update(['weapon' => $wepid]);
+        Characters::where('weapon', $id)->update(['weapon' => 0]);
 
     }
 

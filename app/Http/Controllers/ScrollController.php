@@ -18,8 +18,17 @@ class ScrollController extends Controller
      */
     public function index()
     {
-        $scro = Scroll::all();
+//        $scro = Scroll::all();
+//        $character = Characters::where('user_id', Auth::user()->id);
+//
+//        return view('scroll.index', ['scro' => $scro,'character'=> $character, ]);
+
         $character = Characters::where('user_id', Auth::user()->id);
+        if(Auth::user()->name == "admin"){
+            $scro = Scroll::all();
+        }else{
+            $scro = Scroll::where('playable', '1')->get();
+        }
 
         return view('scroll.index', ['scro' => $scro,'character'=> $character, ]);
     }
@@ -39,9 +48,26 @@ class ScrollController extends Controller
                 Characters::where('user_id', Auth::user()->id)->update(['scroll3' => $request->id]);
             }
         }
+    }
 
+    public function changePlayabilityScroll(Request $request){
+        if(Scroll::where('id', $request->id)->value('playable') == '1'){
+            Scroll::where('id', $request->id)->update(['playable' => '0']);
+            $this->setPlayableScroll($request->id);
+
+        }else{
+            Scroll::where('id', $request->id)->update(['playable' => '1']);
+        }
+    }
+
+//  Function is made for set playable weapon
+    public function setPlayableScroll(int $id){
+        Characters::where('scroll1', $id)->update(['scroll1' => 0]);
+        Characters::where('scroll2', $id)->update(['scroll2' => 0]);
+        Characters::where('scroll3', $id)->update(['scroll3' => 0]);
 
     }
+
     /**
      * Show the form for creating a new resource.
      *

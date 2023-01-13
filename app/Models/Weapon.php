@@ -14,6 +14,7 @@ class Weapon extends Model
         'name',
         'info',
         'image_path',
+        'playable',
     ];
 
     public $timestamps = false;

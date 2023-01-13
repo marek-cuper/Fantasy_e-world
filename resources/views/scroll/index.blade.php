@@ -20,16 +20,44 @@
 
             <div class="slideshow-container-scroll" id="slideshow-container">
 
+
+
                 <?php
 
-                for ($i = 0; $i < $scro->count(); $i++) {
+                foreach ($scro as $scroll) {
                     ?>
 
-                <div class="slide">
-                    <img id="{{ $i }}" src="{{  $scro->where('id', $i)->value('image_path') }}">
-                    <div class="text">{{ __('Cost: ') }}{{  $scro->where('id', $i)->value('cost') }}</div>
-                    <div class="text">{{  $scro->where('id', $i)->value('info') }}</div>
+                <div id="{{ $scroll->id }}" class="slide">
+                    @if(Auth::user()->name == "admin")
+                        <div class="text">Playable</div>
+                        @if($scroll->id != 0)
+                        <div  class="text">
+                            <label class="switch">
+                                    @if($scroll->playable == 1)
+                                        <input class="swicth" type="checkbox" onclick="changePlayable()" checked>
+                                    @else
+                                        <input class="swicth" type="checkbox" onclick="changePlayable()" unchecked>
+                                    @endif
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        @endif
+                    @endif
+                    <img class="wepsImgs" id="{{ $scroll->id }}" src="{{  $scroll->image_path }}">
+                        <div class="text">{{ __('Cost: ') }}{{  $scroll->cost }}</div>
+                        <div class="text">{{  $scroll->info }}</div>
                 </div>
+
+
+
+
+
+{{--                <div class="slide">--}}
+{{--                    <img id="{{ $i }}" src="{{  $scro->where('id', $i)->value('image_path') }}">--}}
+{{--                    <div class="text">{{ __('Cost: ') }}{{  $scro->where('id', $i)->value('cost') }}</div>--}}
+{{--                    <div class="text">{{  $scro->where('id', $i)->value('info') }}</div>--}}
+{{--                </div>--}}
+
                     <?php
                 }
                 ?>
@@ -58,15 +86,15 @@
 
         <div class="scroll-box">
             <div class="scroll-container">
-                <img id="player_scroll1_image" src="{{$scro->where('id', $character->value('scroll1'))->value('image_path') }}">
+                <img id="player_scroll1_image" src="{{$scroll->where('id', $character->value('scroll1'))->value('image_path') }}">
             </div>
 
             <div class="scroll-container">
-                <img id="player_scroll2_image" src="{{$scro->where('id', $character->value('scroll2'))->value('image_path') }}">
+                <img id="player_scroll2_image" src="{{$scroll->where('id', $character->value('scroll2'))->value('image_path') }}">
             </div>
 
             <div class="scroll-container">
-                <img id="player_scroll3_image" src="{{$scro->where('id', $character->value('scroll3'))->value('image_path') }}">
+                <img id="player_scroll3_image" src="{{$scroll->where('id', $character->value('scroll3'))->value('image_path') }}">
             </div>
         </div>
 
@@ -106,7 +134,7 @@
             dots[slideIndex-1].className += " active";
         }
 
-        function chooseScroll(n){
+        function chooseScroll(){
             var src1 = document.getElementById('player_scroll1_image').src;
             var src2 = document.getElementById('player_scroll2_image').src;
             var src3 = document.getElementById('player_scroll3_image').src;
@@ -141,8 +169,21 @@
             } else {
                 alert("Every scroll what you choose must be different");
             }
+        }
 
-
+        function changePlayable(n) {
+            let slides = document.getElementsByClassName("slide");
+            let id = slides[slideIndex-1].id;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "{{ url('/changePlayabilityScroll') }}",
+                type: "post",
+                data: {id: id},
+            });
         }
 
 

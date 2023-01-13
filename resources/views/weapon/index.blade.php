@@ -27,6 +27,7 @@
                 <div id="{{ $wep->id }}" class="slide">
                     @if(Auth::user()->name == "admin")
                         <div class="text">Playable</div>
+                        @if($wep->id != 0)
                         <div  class="text">
                             <label class="switch">
                                 @if($wep->playable == 1)
@@ -37,6 +38,7 @@
                                 <span class="slider round"></span>
                             </label>
                         </div>
+                        @endif
                     @endif
                     <img class="wepsImgs" id="{{ $wep->id }}" src="{{  $wep->image_path }}">
                     <div class="text">{{  $wep->info }}</div>
@@ -123,7 +125,7 @@
                 }
             });
             $.ajax({
-                url: "{{ url('/changePlayability') }}",
+                url: "{{ url('/changePlayabilityWeapon') }}",
                 type: "post",
                 data: {id: id},
                 // success: function(){ // What to do if we succeed

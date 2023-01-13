@@ -16,5 +16,8 @@ class Scroll extends Model
         'cost',
         'info',
         'image_path',
+        'playable',
     ];
+
+    public $timestamps = false;
 }
