@@ -373,12 +373,12 @@ table{
 .weapons-box{
     display: flex;
     justify-content: center;
-    height: 80%;
+    height: 85%;
     margin-left: 15%;
 }
 
 .slideshow-container {
-    width: 40%;
+    width: 60%;
     height: 90%;
     justify-content: center;
     display: flex;
@@ -733,7 +733,7 @@ input:checked + .slider:before {
         height: 120px;
     }
     .slideshow-container {
-        height: 70%;
+        height: 85%;
     }
 
     .weapons-box{

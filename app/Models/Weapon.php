@@ -15,4 +15,6 @@ class Weapon extends Model
         'info',
         'image_path',
     ];
+
+    public $timestamps = false;
 }

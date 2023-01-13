@@ -21,12 +21,25 @@
 
                 <?php
 
-                for ($i = 0; $i < $weps->count(); $i++) {
+                foreach ($weps as $wep) {
                     ?>
 
-                <div class="slide">
-                    <img id="{{ $i }}" src="{{  $weps->where('id', $i)->value('image_path') }}">
-                    <div class="text">{{  $weps->where('id', $i)->value('info') }}</div>
+                <div id="{{ $wep->id }}" class="slide">
+                    @if(Auth::user()->name == "admin")
+                        <div class="text">Playable</div>
+                        <div  class="text">
+                            <label class="switch">
+                                @if($wep->playable == 1)
+                                    <input class="swicth" type="checkbox" onclick="changePlayable()" checked>
+                                @else
+                                    <input class="swicth" type="checkbox" onclick="changePlayable()" unchecked>
+                                @endif
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    @endif
+                    <img class="wepsImgs" id="{{ $wep->id }}" src="{{  $wep->image_path }}">
+                    <div class="text">{{  $wep->info }}</div>
                 </div>
                     <?php
                 }
@@ -37,19 +50,14 @@
             <div><a class="next" onclick="plusSlides(1)">&#10095;</a></div>
 
         </div>
-        <div  class="player_weapon">
-            <label class="switch">
-                <input type="checkbox">
-                <span class="slider round"></span>
-            </label>
-        </div>
+
 
         <div id="weaponSubmit" class="player_weapon_button">
             <button onclick="chooseWeapon()" >Choose weapon</button>
         </div>
 
         <div class="player_weapon">
-            <img id="player_weapon_image" src="{{$weps->where('id', $character->value('picture'))->value('image_path') }}">
+            <img id="player_weapon_image" src="{{$weps->where('id', $character->value('weapon'))->value('image_path') }}">
         </div>
 
 
@@ -87,8 +95,8 @@
         }
 
         function chooseWeapon(){
-            {{--const arrayNames = {{ $weps-> }}--}}
-
+            let slides = document.getElementsByClassName("slide");
+            let id = slides[slideIndex-1].id;
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -97,11 +105,30 @@
             $.ajax({
                 url: "{{ url('/setWeapon') }}",
                 type: "post",
-                data: {id: slideIndex - 1},
+                data: {id: id},
                 success: function(){ // What to do if we succeed
+                    let wepsimgs = document.getElementsByClassName("wepsImgs");
                     var img = document.getElementById("player_weapon_image");
-                    img.src = document.getElementById(slideIndex - 1).src;
+                    img.src = wepsimgs[slideIndex-1].src;
                 }
+            });
+        }
+
+        function changePlayable() {
+            let slides = document.getElementsByClassName("slide");
+            let id = slides[slideIndex-1].id;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "{{ url('/changePlayability') }}",
+                type: "post",
+                data: {id: id},
+                // success: function(){ // What to do if we succeed
+                //     alert(id);
+                // }
             });
         }
 

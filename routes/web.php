@@ -30,6 +30,7 @@ Route::group(['middleware' => ['auth']], function (){
     Route::post('/setCharacterPicture',[\App\Http\Controllers\CharacterController::class, 'setCharacterPicture'])->name('setCharacterPicture');
     Route::post('/createCharacter',[\App\Http\Controllers\CharacterController::class,'createCharacter'])->name('createCharacter');
     Route::post('/setWeapon',[\App\Http\Controllers\WeaponController::class,'setWeapon'])->name('setWeapon');
+    Route::post('/changePlayability',[\App\Http\Controllers\WeaponController::class,'changePlayability'])->name('changePlayability');
     Route::post('/setScroll',[\App\Http\Controllers\ScrollController::class,'setScroll'])->name('setScroll');
     Route::get('/settings', [App\Http\Controllers\UserController::class, 'settings'])->name('settings');
     Route::post('/changePassword',[\App\Http\Controllers\UserController::class,'changePassword'])->name('changePassword');
