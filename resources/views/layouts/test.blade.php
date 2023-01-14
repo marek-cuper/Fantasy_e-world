@@ -40,6 +40,7 @@
 <body>
 @auth
     <div class="sidenav">
+        <a href="{{ url('/lobby') }}">Play</a>
         <a href="{{ url('/home') }}">Home</a>
         <a href="{{ url('/character') }}" >{{ __('Characters') }}</a>
         @if(Auth::user()->character == true)
@@ -58,6 +59,7 @@
     </div>
 
     <div class="middleNav" id="middleNav">
+        <a href="{{ url('/lobby') }}">Play</a>
         <a href="{{ url('/home') }}">Home</a>
         <a href="{{ url('/character') }}" >{{ __('Characters') }}</a>
         @if(Auth::user()->character == true)

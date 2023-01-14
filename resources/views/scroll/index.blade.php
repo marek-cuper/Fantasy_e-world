@@ -134,7 +134,7 @@
             dots[slideIndex-1].className += " active";
         }
 
-        function chooseScroll(){
+        function chooseScroll(n){
             var src1 = document.getElementById('player_scroll1_image').src;
             var src2 = document.getElementById('player_scroll2_image').src;
             var src3 = document.getElementById('player_scroll3_image').src;
@@ -154,15 +154,17 @@
                         scroll: n,
                     },
                     success: function(){ // What to do if we succeed
+                        let slides = document.getElementsByClassName("wepsImgs");
+                        let src = slides[slideIndex-1].src;
                         if(n === 1){
                             var img = document.getElementById("player_scroll1_image");
-                            img.src = document.getElementById(slideIndex - 1).src;
+                            img.src = src;
                         }else if(n === 2){
                             var img = document.getElementById("player_scroll2_image");
-                            img.src = document.getElementById(slideIndex - 1).src;
+                            img.src = src;
                         } else if(n === 3){
                             var img = document.getElementById("player_scroll3_image");
-                            img.src = document.getElementById(slideIndex - 1).src;
+                            img.src = src;
                         }
                     }
                 });

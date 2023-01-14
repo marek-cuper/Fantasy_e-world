@@ -27,6 +27,8 @@ Route::group(['middleware' => ['auth']], function (){
     Route::resource('weapon', \App\Http\Controllers\WeaponController::class);
     Route::resource('scroll', \App\Http\Controllers\ScrollController::class);
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/battle', [App\Http\Controllers\BattleController::class, 'battle'])->name('battle');
+    Route::get('/lobby', [App\Http\Controllers\BattleController::class, 'index'])->name('lobby');
     Route::post('/setCharacterPicture',[\App\Http\Controllers\CharacterController::class, 'setCharacterPicture'])->name('setCharacterPicture');
     Route::post('/createCharacter',[\App\Http\Controllers\CharacterController::class,'createCharacter'])->name('createCharacter');
     Route::post('/setWeapon',[\App\Http\Controllers\WeaponController::class,'setWeapon'])->name('setWeapon');
