@@ -371,6 +371,7 @@ table{
 }
 
 .battle_player_weapon img{
+    display: flex;
     border: 2px solid black;
     background-color: #bbbbbb;
     height: 120px;
@@ -393,12 +394,18 @@ table{
 }
 
 
+/*.battle_box{*/
+/*    height: 200px;*/
+/*    width: 200px;*/
+/*}*/
 
-.battle_box{
+.battle_box img{
     /*border: 2px solid black;*/
-    height: 100px;
-    width: 100px;
+    display: none;
+    height: 200px;
+    width: 200px;
 }
+
 
 .boss_box{
     height: 400px;
@@ -430,6 +437,7 @@ table{
 }
 
 .battle_boss_weapon img{
+    display: flex;
     border: 2px solid black;
     background-color: #555555;
     height: 120px;
@@ -438,6 +446,7 @@ table{
 
 .battle_boss_scrolls{
     display: grid;
+    /*display: grid;*/
     grid-auto-flow: column;
     align-items: center;
     justify-items: center;

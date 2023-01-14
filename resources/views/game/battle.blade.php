@@ -39,7 +39,7 @@
 
     <main class="py-4">
         <div class="battle_info">
-            <p>YOUR TURN</p>
+            <p id="battle_info">FIGHT!</p>
         </div>
         <div class="battle_container">
             <div class="player_box">
@@ -59,31 +59,31 @@
                 </div>
 
                 <div class="battle_player_profwep">
-                    <div class="battle_player_image">
+                    <div id="battle_player_image" class="battle_player_image">
                         <img src="{{$player_img_src}}">
                     </div>
 
-                    <div class="battle_player_weapon">
-                        <img src="{{$player_wep->value('image_path')}}">
+                    <div id="battle_player_weapon" class="battle_player_weapon">
+                        <img onclick="main(0)" src="{{$player_wep->value('image_path')}}">
                     </div>
                 </div>
 
-                <div class="battle_player_scrolls">
+                <div id="battle_player_scrolls" class="battle_player_scrolls">
                     <div class="battle_player_scroll">
-                        <img src="{{$player_scroll1->value('image_path')}}">
+                        <img id="battle_player_scroll1" onclick="main(1)" src="{{$player_scroll1->value('image_path')}}">
                     </div>
                     <div class="battle_player_scroll">
-                        <img src="{{$player_scroll2->value('image_path')}}">
+                        <img id="battle_player_scroll2" onclick="main(2)" src="{{$player_scroll2->value('image_path')}}">
                     </div>
                     <div class="battle_player_scroll">
-                        <img src="{{$player_scroll3->value('image_path')}}">
+                        <img id="battle_player_scroll3" onclick="main(3)" src="{{$player_scroll3->value('image_path')}}">
                     </div>
                 </div>
             </div>
 
 
             <div class="battle_box">
-
+                <img id="battle_action">
             </div>
 
             <div class="boss_box">
@@ -103,7 +103,7 @@
                 </div>
 
                 <div class="battle_boss_profwep">
-                    <div class="battle_boss_weapon">
+                    <div id="battle_boss_weapon" class="battle_boss_weapon">
                         <img src="{{$boss->value('wep_path')}}">
                     </div>
 
@@ -113,7 +113,7 @@
 
                 </div>
 
-                <div class="battle_boss_scrolls">
+                <div id="battle_boss_scrolls" class="battle_boss_scrolls">
                     <div class="battle_boss_scroll">
                         <img src="{{$boss->value('scroll1_path')}}">
                     </div>
@@ -134,6 +134,329 @@
     </main>
 
     <script>
+
+        let playerWeaponName = "{{$player_wep->value('name')}}";
+        let playerWeaponImg = "{{$player_wep->value('image_path')}}";
+        let playerWeaponDmg = {{$player_wep->value('damage')}};
+
+        let bossWeaponName = "{{$boss->value('name')}}";
+        let bossWeaponImg = "{{$boss->value('wep_path')}}";
+        let bossScroll1Img = "{{$boss->value('scroll1_path')}}";
+        let bossScroll2Img = "{{$boss->value('scroll2_path')}}";
+        let bossScroll3Img = "{{$boss->value('scroll3_path')}}";
+        let bossWeaponDmg = {{$boss->value('damage')}};
+        let bossEffects = [];
+
+
+        let round = 0;
+        let textInfo = document.getElementById("battle_info");
+        let actionBox = document.getElementById("battle_action");
+        let wepPlayer = document.getElementById("battle_player_weapon");
+        let scrollsPlayer = document.getElementById("battle_player_scrolls");
+        let playerImage = document.getElementById("battle_player_image");
+
+
+        let healthBarPlayer = document.getElementById("player_health");
+        let healthBarBoss = document.getElementById("boss_health");
+        healthBarPlayer.setAttribute("max", "100");
+        healthBarPlayer.setAttribute("value", "100");
+        healthBarBoss.setAttribute("max", "100");
+        healthBarBoss.setAttribute("value", "100");
+
+        let manaBarPlayer = document.getElementById("player_mana");
+        let manaBarBoss = document.getElementById("boss_mana");
+        manaBarPlayer.setAttribute("max", "100");
+        manaBarPlayer.setAttribute("value", "100");
+        manaBarBoss.setAttribute("max", "100");
+        manaBarBoss.setAttribute("value", "100");
+
+        let wepBoss = document.getElementById("battle_boss_weapon");
+        let scrollsBoss = document.getElementById("battle_boss_scrolls");
+        wepBoss.style.display = 'none';
+        scrollsBoss.style.display = 'none';
+        let playerMaxHealth = 1000;
+        let playerHealth = 1000;
+        let bossMaxHealth = {{$boss->value('health')}};
+        let bossHealth = {{$boss->value('health')}};
+        let playerMaxMana = 10;
+        let playerMana = 10;
+        let playerDiaryStacks = 0;
+        let playerEffects = [];
+
+        let playerPassives = [];
+        if("{{$player_scroll1->value('activation')}}" === "0"){
+            let disscroll = document.getElementById("battle_player_scroll1");
+            disscroll.onclick = null;
+            playerPassives.push("{{$player_scroll1->value('name')}}");
+        }
+        if("{{$player_scroll2->value('activation')}}" === "0"){
+            let disscroll = document.getElementById("battle_player_scroll2");
+            disscroll.onclick = null;
+            playerPassives.push("{{$player_scroll2->value('name')}}");
+
+        }
+        if("{{$player_scroll3->value('activation')}}" === "0"){
+            let disscroll = document.getElementById("battle_player_scroll3");
+            disscroll.onclick = null;
+            playerPassives.push("{{$player_scroll3->value('name')}}");
+        }
+
+
+        function main(action){
+            //0-wep, 1-scroll1, 2-scroll2, 3-scroll3
+            // textInfo.textContent = ""
+
+            round++;
+            showPlayerOptions(0);
+            playerAction(action);
+            // showAction(img_path)
+            sleepFunc(2000).then(() => {
+                clearAction();
+                showPlayerOptions(0);
+                showBossOptions(1)
+                sleepFunc(2000).then(() => {
+                    showBossOptions(0)
+                    bossAction();
+                    sleepFunc(2000).then(() => {
+                        clearAction();
+                        showPlayerOptions(1);
+                        endRound();
+                    });
+                });
+            });
+
+
+
+        }
+
+        function sleepFunc(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        function showPlayerOptions(tf){
+            if(tf === 1){
+                wepPlayer.style.display = 'flex';
+                scrollsPlayer.style.display = 'grid';
+            } else {
+                wepPlayer.style.display = 'none';
+                scrollsPlayer.style.display = 'none';
+            }
+            sleepFunc(1);
+        }
+
+        function showBossOptions(tf){
+            if(tf === 1){
+                wepBoss.style.display = 'flex';
+                scrollsBoss.style.display = 'grid';
+            } else {
+                wepBoss.style.display = 'none';
+                scrollsBoss.style.display = 'none';
+            }
+            sleepFunc(1);
+        }
+
+        function showAction(image_path){
+            actionBox.src = image_path;
+            actionBox.style.display = 'block';
+        }
+
+        function clearAction(){
+            actionBox.style.display = 'none';
+        }
+
+        function playerGetHeal(heal){
+            playerHealth = playerHealth + heal;
+            if(playerHealth > playerMaxHealth){
+                playerHealth = playerMaxHealth;
+            }
+            updateHealthMana();
+        }
+
+        function bossGetHeal(heal){
+            bossHealth = bossHealth + heal;
+            if(bossHealth > bossMaxHealth){
+                bossHealth = bossMaxHealth;
+            }
+            updateHealthMana();
+        }
+
+        function playerGetDamage(damage){
+            playerHealth = playerHealth - damage;
+            if( playerHealth <= 0){
+                dead(0)
+            }
+            updateHealthMana();
+        }
+
+        function bossGetDamage(damage){
+            bossHealth = bossHealth - damage;
+            if( bossHealth <= 0){
+                dead(0)
+            }
+            updateHealthMana();
+        }
+
+        function updateHealthMana(){
+            healthBarBoss.setAttribute('value', (bossHealth/bossMaxHealth * 100).toString());
+            healthBarPlayer.setAttribute('value', (playerHealth/playerMaxHealth * 100).toString());
+            manaBarPlayer.setAttribute('value', (playerMana/playerMaxMana * 100).toString());
+        }
+
+        function addMana(mana){
+            playerMana = playerMana + mana;
+            if(playerMana >= playerMaxMana){
+                playerMana = playerMaxMana;
+            }
+            updateHealthMana();
+        }
+
+        function spendMana(mana){
+            playerMana = playerMana - mana;
+            if(playerMana <= 0){
+                playerMana = 0;
+                updateHealthMana();
+                return 0;
+            }
+            updateHealthMana();
+            return 1;
+        }
+
+        function dead(who){
+            if(who === 0){
+                alert("{{$character->value('name')}} lose battle");
+            } else {
+                alert("{{$character->value('name')}} is WINNER");
+
+            }
+        }
+        function bossAction(){
+            let image_path;
+            if(round%2 === 0){
+                image_path = bossWeaponImg;
+                playerGetDamage(bossWeaponDmg)
+            }else{
+                if(round%6 === 1){
+                    image_path = bossScroll1Img;
+                    bossWeaponDmg += 50;
+                } else if(round%6 === 3){
+                    image_path = bossScroll2Img;
+                    bossEffects = [];
+                    playerEffects = [];
+                    playerImage.style.display = 'flex';
+                } else {
+                    image_path = bossScroll3Img;
+                    bossGetHeal(1000);
+                }
+                bossGetHeal(200);
+            }
+            showAction(image_path)
+        }
+
+        function playerAction(action){
+            if(action === 0){
+                playerWeaponAction();
+            } else {
+                playerScrollAction(action);
+            }
+            if (playerWeaponName === "Axes"){
+                bossGetDamage(playerWeaponDmg/2);
+            }
+
+        }
+
+        function playerWeaponAction(){
+            let damage = playerWeaponDmg;
+            if (playerImage.style.display === 'none'){
+                if(playerWeaponName === "Daggers"){
+                    damage = damage * 3;
+                }
+            }
+            bossGetDamage(damage);
+            if(playerEffects.includes("totem")){
+                playerGetHeal(damage/10)
+            }
+
+            showAction(playerWeaponImg);
+
+
+            if(playerImage.style.display === 'none'){
+                playerImage.style.display = 'flex';
+            }
+        }
+
+        function playerScrollAction(action){
+
+            let imgPath;
+            let scrollName;
+            let scrollCost;
+            if(action === 1){
+                imgPath = "{{$player_scroll1->value('image_path')}}";
+                scrollName = "{{$player_scroll1->value('name')}}";
+                scrollCost = {{$player_scroll1->value('cost')}};
+            }else if(action === 2){
+                imgPath = "{{$player_scroll2->value('image_path')}}";
+                scrollName = "{{$player_scroll2->value('name')}}";
+                scrollCost = {{$player_scroll2->value('cost')}};
+
+            } else{
+                imgPath = "{{$player_scroll3->value('image_path')}}";
+                scrollName = "{{$player_scroll3->value('name')}}";
+                scrollCost = {{$player_scroll3->value('cost')}};
+
+            }
+            if (spendMana(scrollCost) === 1){
+                if(scrollName === "Thief scroll"){
+                    playerImage.style.display = 'none';
+                }
+                if(scrollName === "Healing scroll"){
+                    playerGetHeal(playerMaxHealth/4);
+                }
+                if(scrollName === "Mana scroll"){
+                    playerMaxMana += 2;
+                    addMana(5);
+                }
+                if(scrollName === "Diary"){
+                    if (playerDiaryStacks > 4){
+                        bossGetDamage(2000);
+                        imgPath = "images/scrolls/diary2.png"
+                    }
+                    playerDiaryStacks++;
+                }
+                if(scrollName === "Totem"){
+                    if(!playerEffects.includes("totem")){
+                        playerEffects.push("totem");
+                    }
+                }
+                if(scrollName === "Abyssbook"){
+                    let damage = 500;
+                    if(playerPassives.includes("Infernal scroll")){
+                        damage = damage * 2;
+                    }
+                    bossGetDamage(damage);
+                    bossEffects.push("fire");
+                }
+            } else {
+                imgPath = "images/trash.png"
+            }
+
+            showAction(imgPath)
+
+        }
+
+        function endRound(){
+            addMana(1);
+            if(playerPassives.includes("Repair scroll")){
+                playerGetHeal(playerMaxHealth/20);
+            }
+            if(bossEffects.includes("fire")){
+                let damage = bossMaxHealth/50;
+                if(playerPassives.includes("Infernal scroll")){
+                    damage = damage * 2;
+                }
+                bossGetDamage(damage)
+            }
+        }
+
 
 
     </script>
