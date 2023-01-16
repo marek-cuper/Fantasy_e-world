@@ -137,11 +137,11 @@
 }
 .chat-box {
     top: 15%;
-
     color: white;
     background-color: rgba(17, 17, 17, 0.82);
     overflow-x: hidden;
     padding-top: 3vh;
+    margin-bottom: 3vh;
     border: 5px solid #818181;
     margin-left: 15%;
 }
@@ -313,19 +313,19 @@ table{
 }
 /*Battle*/
 
-.battle_info{
-    width: 40%;
-    height: 5%;
-    position: absolute;
-    left: 50%;
-    top: 10%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    align-items: center;
-}
-.battle_info p {
-    font-size: 5vh;
-}
+/*.battle_info{*/
+/*    width: 40%;*/
+/*    height: 5%;*/
+/*    position: absolute;*/
+/*    left: 50%;*/
+/*    top: 10%;*/
+/*    transform: translate(-50%, -50%);*/
+/*    text-align: center;*/
+/*    align-items: center;*/
+/*}*/
+/*.battle_info p {*/
+/*    font-size: 5vh;*/
+/*}*/
 
 .battle_container {
     display: grid;
@@ -337,7 +337,7 @@ table{
     height: 60%;
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 45%;
     transform: translate(-50%, -50%);
 }
 
@@ -391,6 +391,20 @@ table{
     display: grid;
     height: 120px;
     width: 120px;
+}
+
+.battle_player_buffs{
+    display: flex;
+    margin-top: 1vh;
+
+}
+
+.battle_player_buff img{
+    border: 2px solid black;
+    background-color: #bbbbbb;
+    display: none;
+    height: 80px;
+    width: 80px;
 }
 
 
@@ -460,6 +474,56 @@ table{
     width: 120px;
 }
 
+.battle_boss_buffs{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1vh;
+
+}
+
+.battle_boss_buff img{
+    border: 2px solid black;
+    background-color: #555555;
+    display: none;
+    height: 80px;
+    width: 80px;
+}
+
+.endMenu img{
+    left: 50%;
+    top: 50%;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+
+    transform: translate(-50%, -50%);
+}
+.endMenu p {
+    left: 50%;
+    top: 45%;
+    text-align: center;
+    font-size: 5vh;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    border: 3px solid #818181;
+    background-color: rgba(17, 17, 17, 0.82);
+    color: #818181;
+
+}
+
+.endMenu button {
+    left: 50%;
+    top: 60%;
+    text-align: center;
+    font-size: 3vh;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    border: 3px solid #818181;
+    background-color: rgba(17, 17, 17, 0.82);
+    color: #818181;
+}
+
 /*CharacterPicture*/
 
 .character-container {
@@ -467,11 +531,14 @@ table{
     width: 80%;
     height: 60%;
     position: absolute;
-    margin-left: 12vh;
     left: 50%;
     top: 30%;
     transform: translate(-50%, -50%);
 }
+.character-text{
+    margin-top: 10%;
+}
+
 .character-container .weapons-box img {
     margin-top: 10%;
 }
@@ -508,6 +575,11 @@ table{
     margin-top: 5%;
 }
 
+.charInput{
+    scale: 1.5;
+    margin-bottom: 3vh;
+}
+
 /*Weapon*/
 .weapon-container {
     text-align: center;
@@ -527,8 +599,8 @@ table{
 }
 
 .slideshow-container {
-    width: 60%;
-    height: 90%;
+    width: 40%;
+    height: 80%;
     justify-content: center;
     display: flex;
     position: relative;
@@ -693,7 +765,7 @@ input:checked + .slider:before {
 
 .slideshow-container-scroll {
     width: 40%;
-    height: 100%;
+    height: 95%;
     justify-content: center;
     display: flex;
     position: relative;
@@ -712,6 +784,10 @@ input:checked + .slider:before {
     display: flex;
     justify-content: center;
     margin-left: 15%;
+    margin-right: 0;
+    grid-column-gap: 10%;
+    align-items: center;
+
 }
 
 .scroll-container {
@@ -727,14 +803,14 @@ input:checked + .slider:before {
 }
 
 .scroll-container img{
-    max-width: 200%;
-    max-height: 200%;
+    height: 150px;
+    width: 150px;
 }
 
 
 .player_scroll_button{
     width: 217px;
-    height: 60px;
+    height: 70px;
     font-size: 2vh;
     justify-content: center;
     display: flex;
@@ -760,7 +836,7 @@ input:checked + .slider:before {
 
     display: block;
     position: absolute;
-    top: 60%;
+    top: 75%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: black;
@@ -773,17 +849,27 @@ input:checked + .slider:before {
 
     opacity: 0.9;
     color: #818181;
-    font-size: 2vh;
     scale: 1.15;
 }
 .settingsBox div{
     text-align: center;
-    margin: 1.5vh;
-    scale: 1.25;
+
+    scale: 1;
+}
+.settingsBox form div{
+    margin-bottom: 0.5vh;
+}
+
+.settingsBox form{
+    margin-bottom: 2vh;
+}
+
+.settingsBox p {
+    margin-bottom: 0;
 }
 
 .settingsBox input{
-    font-size: 1.5vh;
+    font-size: 1.2vh;
 }
 .settingsBox input .checkbox{
     width: 5vh;
@@ -813,6 +899,26 @@ input:checked + .slider:before {
 }
 
 
+li{
+    font-family: monospace;
+    padding: 1vh 1vh 2vh 2vh;
+    font-size: 3vh;
+}
+a{
+    font-family: monospace;
+}
+p{
+    font-family: monospace;
+    font-size: 2vh;
+}
+td{
+    font-family: monospace;
+}
+
+.chat-box:last-child li{
+    font-size: 2vh;
+}
+
 @media screen and (max-width: 1200px), (max-height: 700px) {
 
     .sidenav{
@@ -830,6 +936,8 @@ input:checked + .slider:before {
     .chat-box{
         margin-left: 0;
     }
+
+
     .trainBox {
         margin: 0;
     }
@@ -857,9 +965,191 @@ input:checked + .slider:before {
         text-align: center;
     }
 
+
+
+
+
+    /*Battle*/
+    .battle_container {
+
+        text-align: center;
+        display: initial;
+        /*grid-auto-flow: column;*/
+        /*grid-column-gap: 5%;*/
+        justify-content: center;
+        /*align-items: center;*/
+        /*width: 95%;*/
+        /*height: 60%;*/
+        /*position: absolute;*/
+        /*left: 50%;*/
+        /*top: 45%;*/
+        width: 60%;
+        height: 95%;
+        left: 55%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .player_box{
+        height: 200px;
+        width: 180px;
+        margin-bottom: 30%;
+    }
+
+    .battle_player_info {
+        text-align: center;
+    }
+
+    .battle_player_profwep{
+        display: grid;
+        grid-auto-flow: column;
+        align-items: center;
+        justify-items: center;
+    }
+
+    .battle_player_image img{
+        height: 100px;
+        width: 100px;
+    }
+
+    .battle_player_weapon img{
+        display: flex;
+        height: 60px;
+        width: 60px;
+    }
+
+    .battle_player_scrolls{
+        display: grid;
+        grid-auto-flow: column;
+        align-items: center;
+        justify-items: center;
+    }
+
+    .battle_player_scroll img{
+        display: grid;
+        height: 60px;
+        width: 60px;
+    }
+
+    .battle_player_buffs{
+        display: flex;
+        margin-top: 1vh;
+
+    }
+
+    .battle_player_buff img{
+        display: none;
+        height: 40px;
+        width: 40px;
+    }
+
+
+    /*.battle_box{*/
+    /*    height: 200px;*/
+    /*    width: 200px;*/
+    /*}*/
+
+    .battle_box img{
+        /*border: 2px solid black;*/
+        display: none;
+        height: 100px;
+        width: 100px;
+    }
+
+    .boss_box{
+        height: 200px;
+        width: 180px;
+        margin-top: 30%;
+    }
+
+    .battle_boss_info {
+        text-align: center;
+    }
+
+    .battle_boss_profwep{
+        display: grid;
+        grid-auto-flow: column;
+        align-items: center;
+        justify-items: center;
+    }
+
+    .battle_boss_image img{
+        height: 100px;
+        width: 100px;
+    }
+
+    .battle_boss_weapon img{
+        display: flex;
+        height: 60px;
+        width: 60px;
+    }
+
+    .battle_boss_scrolls{
+        display: grid;
+        /*display: grid;*/
+        grid-auto-flow: column;
+        align-items: center;
+        justify-items: center;
+    }
+
+    .battle_boss_scroll img{
+        display: grid;
+        height: 60px;
+        width: 60px;
+    }
+
+    .battle_boss_buffs{
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 1vh;
+
+    }
+
+    .battle_boss_buff img{
+        display: none;
+        height: 40px;
+        width: 40px;
+    }
+
+    .endMenu img{
+        left: 50%;
+        top: 50%;
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        transform: translate(-50%, -50%);
+    }
+    .endMenu p {
+        left: 50%;
+        top: 45%;
+        text-align: center;
+        font-size: 5vh;
+        position: absolute;
+        transform: translate(-50%, -50%);
+
+    }
+
+    .endMenu button {
+        left: 50%;
+        top: 60%;
+        text-align: center;
+        font-size: 3vh;
+        position: absolute;
+        transform: translate(-50%, -50%);
+    }
+
+
+
+
+
+
     /*Characters*/
     .character-container .slideshow-container {
         width: 60%;
+    }
+    .character-text{
+        margin-top: 40%;
     }
     .character-container img {
         width: 200px;
@@ -867,6 +1157,11 @@ input:checked + .slider:before {
     }
     .character-container {
         margin-left: 0;
+    }
+    .character-container p {
+
+        margin-left: 25%;
+        margin-right: 25%;
     }
 
 
@@ -915,31 +1210,26 @@ input:checked + .slider:before {
         height: 100px;
     }
 
+
     .scroll-box{
-        margin-left: 0;
+        margin-left: 25%;
+        margin-right: 25%;
+        grid-column-gap: 10%;
     }
 
     /*Settings*/
     .settingsBox{
         margin-left: 5%;
     }
+    .chat-box:last-child li{
+        font-size: 1.5vh;
+    }
+    li{
+        padding: 1vh 1vh 1vh 1vh;
+        font-size: 2vh;
+    }
 
 
-}
-li{
-    font-family: monospace;
-    padding: 1vh 1vh 2vh 2vh;
-    font-size: 3vh;
-}
-a{
-    font-family: monospace;
-}
-p{
-    font-family: monospace;
-    font-size: 2vh;
-}
-td{
-    font-family: monospace;
 }
 
 

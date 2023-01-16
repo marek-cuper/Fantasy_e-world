@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Aginev\Datagrid\Datagrid;
 use App\Models\Characters;
 use App\Models\Character_picture;
 use http\Client\Curl\User;
@@ -57,6 +58,17 @@ class CharacterController extends Controller
         Auth::user()->character = $request->id;
         Auth::user()->save();
         $this->index();
+    }
+
+    public function statistic(Request $request): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application
+    {
+        $characters = \App\Models\Characters::paginate(10);
+
+        $grid = new Datagrid($characters, $request->get('f', []));
+
+        $grid->setColumn('name', 'Character name')->setColumn('level', 'Level');
+
+        return view('character.statistic', ['grid' => $grid]);
     }
 
     /**
@@ -120,7 +132,7 @@ class CharacterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function deleteCharacter(Request $request)
+    public function deleteCharacter()
     {
         $user = Auth::user();
         if ($user->character == 1){

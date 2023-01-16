@@ -1,4 +1,4 @@
-@extends('layouts.test')
+@extends('layouts.game-layout')
 
 @section('content')
     <div class="character-container">
@@ -6,9 +6,11 @@
 
             <?php
 
-            for ($i = 0; $i < $chars->count(); $i++) {
+            for ($i = 0;
+                 $i < $chars->count();
+                 $i++) {
                 ?>
-                    <span class="dot" onclick="currentSlide($i)"></span>
+            <span class="dot" onclick="currentSlide($i)"></span>
                 <?php
             }
             ?>
@@ -21,7 +23,9 @@
 
                 <?php
 
-                for ($i = 0; $i < $chars->count(); $i++) {
+                for ($i = 0;
+                     $i < $chars->count();
+                     $i++) {
                     ?>
 
                 <div class="slide">
@@ -39,35 +43,38 @@
         </div>
 
         <div class="scroll-box">
-{{--            <form method="POST" action="{{ route('createCharacter') }}">--}}
-{{--                @csrf--}}
-{{--                <div>--}}
-{{--                    <input onclick="chooseCharacter()" id="name" type="text" placeholder="Name" @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>--}}
-{{--                    @error('name')--}}
-{{--                    <span class="invalid-feedback" role="alert">--}}
-{{--                            <strong>{{ $message }}</strong>--}}
-{{--                        </span>--}}
-{{--                    @enderror--}}
-{{--                </div>--}}
-{{--                <div>--}}
-{{--                    <button type="submit">Create character</button>--}}
-{{--                </div>--}}
-{{--            </form>--}}
+            {{--            <form method="POST" action="{{ route('createCharacter') }}">--}}
+            {{--                @csrf--}}
+            {{--                <div>--}}
+            {{--                    <input onclick="chooseCharacter()" id="name" type="text" placeholder="Name" @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>--}}
+            {{--                    @error('name')--}}
+            {{--                    <span class="invalid-feedback" role="alert">--}}
+            {{--                            <strong>{{ $message }}</strong>--}}
+            {{--                        </span>--}}
+            {{--                    @enderror--}}
+            {{--                </div>--}}
+            {{--                <div>--}}
+            {{--                    <button type="submit">Create character</button>--}}
+            {{--                </div>--}}
+            {{--            </form>--}}
             <div>
-                <input id="name" type="text" placeholder="Name" >
-
-                <button onclick="chooseCharacter()" >Create character</button>
+                <div class="charInput">
+                    <input id="name" type="text" placeholder="Name">
+                </div>
+                <div>
+                    <button onclick="chooseCharacter()">Create character</button>
+                </div>
             </div>
         </div>
 
 
-{{--        <div id="weaponSubmit" class="player_weapon_button">--}}
-{{--            <button onclick="chooseCharacter()" >Create character</button>--}}
-{{--        </div>--}}
+        {{--        <div id="weaponSubmit" class="player_weapon_button">--}}
+        {{--            <button onclick="chooseCharacter()" >Create character</button>--}}
+        {{--        </div>--}}
 
-{{--        <div class="player_weapon">--}}
-{{--            <img id="player_character_image" src="{{  $chars->where('id', Auth::user()->character)->value('image_path') }}">--}}
-{{--        </div>--}}
+        {{--        <div class="player_weapon">--}}
+        {{--            <img id="player_character_image" src="{{  $chars->where('id', Auth::user()->character)->value('image_path') }}">--}}
+        {{--        </div>--}}
 
 
     </div>
@@ -91,19 +98,23 @@
             let i;
             let slides = document.getElementsByClassName("slide");
             let dots = document.getElementsByClassName("dot");
-            if (n > slides.length) {slideIndex = 1}
-            if (n < 1) {slideIndex = slides.length}
+            if (n > slides.length) {
+                slideIndex = 1
+            }
+            if (n < 1) {
+                slideIndex = slides.length
+            }
             for (i = 0; i < slides.length; i++) {
                 slides[i].style.display = "none";
             }
             for (i = 0; i < dots.length; i++) {
                 dots[i].className = dots[i].className.replace(" active", "");
             }
-            slides[slideIndex-1].style.display = "block";
-            dots[slideIndex-1].className += " active";
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
         }
 
-        function chooseCharacter(){
+        function chooseCharacter() {
             var input = document.getElementById("name");
 
             $.ajaxSetup({
@@ -116,8 +127,9 @@
                 type: "post",
                 data: {
                     name: input.value,
-                    id: slideIndex - 1},
-                success: function(){ // What to do if we succeed
+                    id: slideIndex - 1
+                },
+                success: function () { // What to do if we succeed
                     window.location.href = "{{URL::to('/character')}}"
                 }
             });

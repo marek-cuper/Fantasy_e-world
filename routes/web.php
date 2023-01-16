@@ -35,10 +35,13 @@ Route::group(['middleware' => ['auth']], function (){
     Route::post('/changePlayabilityWeapon',[\App\Http\Controllers\WeaponController::class,'changePlayabilityWeapon'])->name('changePlayabilityWeapon');
     Route::post('/setScroll',[\App\Http\Controllers\ScrollController::class,'setScroll'])->name('setScroll');
     Route::post('/changePlayabilityScroll',[\App\Http\Controllers\ScrollController::class,'changePlayabilityScroll'])->name('changePlayabilityScroll');
-    Route::get('/settings', [App\Http\Controllers\UserController::class, 'settings'])->name('settings');
+    Route::get('/profile', [App\Http\Controllers\UserController::class, 'index'])->name('profile');
+    Route::post('/changeName',[\App\Http\Controllers\UserController::class,'changeName'])->name('changeName');
+    Route::post('/changeEmail',[\App\Http\Controllers\UserController::class,'changeEmail'])->name('changeEmail');
     Route::post('/changePassword',[\App\Http\Controllers\UserController::class,'changePassword'])->name('changePassword');
     Route::delete('/delete', [App\Http\Controllers\UserController::class, 'delete'])->name('delete');
     Route::delete('/deleteCharacter', [App\Http\Controllers\CharacterController::class, 'deleteCharacter'])->name('deleteCharacter');
+    Route::get('/statistic', [App\Http\Controllers\CharacterController::class, 'statistic'])->name('statistic');
 
 });
 

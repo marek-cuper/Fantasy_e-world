@@ -38,9 +38,9 @@
 
 
     <main class="py-4">
-        <div class="battle_info">
-            <p id="battle_info">FIGHT!</p>
-        </div>
+{{--        <div class="battle_info">--}}
+{{--            <p id="battle_info">FIGHT!</p>--}}
+{{--        </div>--}}
         <div class="battle_container">
             <div class="player_box">
 
@@ -77,6 +77,18 @@
                     </div>
                     <div class="battle_player_scroll">
                         <img id="battle_player_scroll3" onclick="main(3)" src="{{$player_scroll3->value('image_path')}}">
+                    </div>
+                </div>
+
+                <div id="battle_player_buffs" class="battle_player_buffs">
+                    <div class="battle_player_buff">
+                        <img id="battle_player_buff1"  src="{{$player_scroll1->value('image_path')}}">
+                    </div>
+                    <div class="battle_player_buff">
+                        <img id="battle_player_buff2"  src="{{$player_scroll2->value('image_path')}}">
+                    </div>
+                    <div class="battle_player_buff">
+                        <img id="battle_player_buff3"  src="{{$player_scroll3->value('image_path')}}">
                     </div>
                 </div>
             </div>
@@ -125,15 +137,43 @@
                     </div>
                 </div>
 
+                <div id="battle_boss_buffs" class="battle_boss_buffs">
+                    <div class="battle_boss_buff">
+                        <img id="battle_boss_buff1" src="{{$player_scroll1->value('image_path')}}">
+                    </div>
+                    <div class="battle_boss_buff">
+                        <img id="battle_boss_buff2" src="{{$player_scroll2->value('image_path')}}">
+                    </div>
+                    <div class="battle_boss_buff">
+                        <img id="battle_boss_buff3" src="{{$player_scroll3->value('image_path')}}">
+                    </div>
+                </div>
+
             </div>
 
 
+        </div>
+
+        <div class="endMenu" id="endMenu">
+            <img src="{{$boss->value('backg_path')}}">
+            <p id="endMenuText">You won battle</p>
+            <form method="GET" action="{{ url('/lobby') }}">
+                @csrf
+                <div>
+                    <button class="delete_char_button" type="submit">Leave battle</button>
+                </div>
+            </form>
         </div>
 
 
     </main>
 
     <script>
+
+        let end = 0;
+        let endMenu = document.getElementById("endMenu");
+        endMenu.style.display = "none";
+        let endMenuText = document.getElementById("endMenuText");
 
         let playerWeaponName = "{{$player_wep->value('name')}}";
         let playerWeaponImg = "{{$player_wep->value('image_path')}}";
@@ -154,6 +194,15 @@
         let wepPlayer = document.getElementById("battle_player_weapon");
         let scrollsPlayer = document.getElementById("battle_player_scrolls");
         let playerImage = document.getElementById("battle_player_image");
+
+        let effect1PlayerImg = document.getElementById("battle_player_buff1");
+        let effect2PlayerImg = document.getElementById("battle_player_buff2");
+        let effect3PlayerImg = document.getElementById("battle_player_buff3");
+
+        let effect1BossImg = document.getElementById("battle_boss_buff1");
+        let effect2BossImg = document.getElementById("battle_boss_buff2");
+        let effect3BossImg = document.getElementById("battle_boss_buff3");
+
 
 
         let healthBarPlayer = document.getElementById("player_health");
@@ -283,7 +332,7 @@
         function playerGetDamage(damage){
             playerHealth = playerHealth - damage;
             if( playerHealth <= 0){
-                dead(0)
+                dead(1)
             }
             updateHealthMana();
         }
@@ -312,7 +361,7 @@
 
         function spendMana(mana){
             playerMana = playerMana - mana;
-            if(playerMana <= 0){
+            if(playerMana < 0){
                 playerMana = 0;
                 updateHealthMana();
                 return 0;
@@ -322,11 +371,11 @@
         }
 
         function dead(who){
+            endMenu.style.display = "flex";
             if(who === 0){
-                alert("{{$character->value('name')}} lose battle");
+                endMenuText.textContent = "{{$character->value('name')}} is WINNER"
             } else {
-                alert("{{$character->value('name')}} is WINNER");
-
+                endMenuText.textContent = "{{$character->value('name')}} is LOSER"
             }
         }
         function bossAction(){
@@ -343,6 +392,7 @@
                     bossEffects = [];
                     playerEffects = [];
                     playerImage.style.display = 'flex';
+                    updateBuffsImg();
                 } else {
                     image_path = bossScroll3Img;
                     bossGetHeal(1000);
@@ -371,10 +421,23 @@
                     damage = damage * 3;
                 }
             }
+            if(playerWeaponName === "Scythe"){
+                playerGetHeal(damage/2)
+            }
+            if(playerWeaponName === "Torch"){
+                if(!bossEffects.includes("fire")){
+                    bossEffects.push("fire");
+                    updateBuffsImg();
+                }
+            }
+            if(playerWeaponName === "Shadow staff"){
+                playerWeaponDmg = playerWeaponDmg + 80;
+            }
             bossGetDamage(damage);
             if(playerEffects.includes("totem")){
                 playerGetHeal(damage/10)
             }
+
 
             showAction(playerWeaponImg);
 
@@ -406,7 +469,11 @@
             }
             if (spendMana(scrollCost) === 1){
                 if(scrollName === "Thief scroll"){
-                    playerImage.style.display = 'none';
+                    if(!playerEffects.includes("invisibility")){
+                        playerImage.style.display = 'none';
+                        playerEffects.push('invisibility')
+                        updateBuffsImg();
+                    }
                 }
                 if(scrollName === "Healing scroll"){
                     playerGetHeal(playerMaxHealth/4);
@@ -425,6 +492,7 @@
                 if(scrollName === "Totem"){
                     if(!playerEffects.includes("totem")){
                         playerEffects.push("totem");
+                        updateBuffsImg();
                     }
                 }
                 if(scrollName === "Abyssbook"){
@@ -433,7 +501,20 @@
                         damage = damage * 2;
                     }
                     bossGetDamage(damage);
-                    bossEffects.push("fire");
+                    if(!bossEffects.includes("fire")){
+                        bossEffects.push("fire");
+                        updateBuffsImg();
+                    }
+
+                }
+                if(scrollName === "Execution book"){
+                    if(bossHealth < (bossMaxHealth/5)){
+                        bossGetDamage(bossHealth + 100);
+                    }
+                }
+                if(scrollName === "Runner scroll"){
+                    endMenu.style.display = "flex";
+                    endMenuText.textContent = "{{$character->value('name')}} run from battle away"
                 }
             } else {
                 imgPath = "images/trash.png"
@@ -449,11 +530,66 @@
                 playerGetHeal(playerMaxHealth/20);
             }
             if(bossEffects.includes("fire")){
-                let damage = bossMaxHealth/50;
+                let damage = bossMaxHealth/100*1.5;
                 if(playerPassives.includes("Infernal scroll")){
                     damage = damage * 2;
                 }
                 bossGetDamage(damage)
+            }
+        }
+
+        function updateBuffsImg(){
+            effect1PlayerImg.style.display = 'none';
+            effect2PlayerImg.style.display = 'none';
+            effect3PlayerImg.style.display = 'none';
+            effect1BossImg.style.display = 'none';
+            effect2BossImg.style.display = 'none';
+            effect3BossImg.style.display = 'none';
+
+            if (playerEffects.length === 1){
+
+                effect1PlayerImg.src = getImgSrcForEffect(playerEffects[0]);
+                effect1PlayerImg.style.display = 'grid';
+            }else if (playerEffects.length === 2){
+                effect1PlayerImg.src = getImgSrcForEffect(playerEffects[0]);
+                effect1PlayerImg.style.display = 'grid';
+                effect2PlayerImg.src = getImgSrcForEffect(playerEffects[1]);
+                effect2PlayerImg.style.display = 'grid';
+            }else if (playerEffects.length === 3){
+                effect1PlayerImg.src = getImgSrcForEffect(playerEffects[0]);
+                effect1PlayerImg.style.display = 'grid';
+                effect2PlayerImg.src = getImgSrcForEffect(playerEffects[1]);
+                effect2PlayerImg.style.display = 'grid';
+                effect3PlayerImg.src = getImgSrcForEffect(playerEffects[2]);
+                effect3PlayerImg.style.display = 'grid';
+            }
+
+            if (bossEffects.length === 1){
+                effect3BossImg.src = getImgSrcForEffect(bossEffects[0]);
+                effect3BossImg.style.display = 'grid';
+            }else if (bossEffects.length === 2){
+                effect3BossImg.src = getImgSrcForEffect(bossEffects[0]);
+                effect3BossImg.style.display = 'grid';
+                effect2BossImg.src = getImgSrcForEffect(bossEffects[1]);
+                effect2BossImg.style.display = 'grid';
+            }else if (bossEffects.length === 3){
+                effect3BossImg.src = getImgSrcForEffect(bossEffects[0]);
+                effect3BossImg.style.display = 'grid';
+                effect2BossImg.src = getImgSrcForEffect(bossEffects[1]);
+                effect2BossImg.style.display = 'grid';
+                effect1BossImg.src = getImgSrcForEffect(bossEffects[2]);
+                effect1BossImg.style.display = 'grid';
+            }
+
+        }
+
+        function getImgSrcForEffect(effect){
+            if(effect === 'fire'){
+                return 'images/effects/fire.png'
+            } else if(effect === 'totem'){
+                return 'images/scrolls/totem.png'
+            }else if(effect === 'invisibility'){
+                return 'images/effects/invisibility.png'
             }
         }
 

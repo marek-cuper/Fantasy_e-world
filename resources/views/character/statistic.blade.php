@@ -1,4 +1,4 @@
-@extends('layouts.test')
+@extends('layouts.game-layout')
 
 @section('content')
     <div class="container">
