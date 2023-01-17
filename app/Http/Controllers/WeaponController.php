@@ -18,9 +18,6 @@ class WeaponController extends Controller
     public function index()
     {
         $character = Characters::where('user_id', Auth::user()->id);
-//        if ( Weapon::where('id', $character->value('weapon'))->value('playable') == 0 ){
-//            $this->setPlayableWeapon();
-//        }
 
         if(Auth::user()->name == "admin"){
             $weps = Weapon::all();

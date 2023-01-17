@@ -24,10 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-//        $wep = \App\Models\Weapon::where('id', Auth::user()->weapon);
-//        return view('home', compact('wep'));
-//        $weps = \App\Models\Weapon::all();
-//        return view('home', compact('weps'));
         return view('home');
     }
 }

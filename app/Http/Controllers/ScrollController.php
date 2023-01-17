@@ -18,11 +18,6 @@ class ScrollController extends Controller
      */
     public function index()
     {
-//        $scro = Scroll::all();
-//        $character = Characters::where('user_id', Auth::user()->id);
-//
-//        return view('scroll.index', ['scro' => $scro,'character'=> $character, ]);
-
         $character = Characters::where('user_id', Auth::user()->id);
         if(Auth::user()->name == "admin"){
             $scro = Scroll::all();

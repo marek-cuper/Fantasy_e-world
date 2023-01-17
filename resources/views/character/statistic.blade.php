@@ -9,7 +9,7 @@
                 </div>
             @endif
             <div class="statistics">
-                <p>{!! $grid->show() !!}</p>
+                {!! $grid->show() !!}
 
             </div>
         </div>

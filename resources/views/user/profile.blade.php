@@ -16,7 +16,7 @@
                     <form action="{{ route('changeName') }}" method="post">
                         <div>
                             <input id="newName" type="text" placeholder="New name" name="newName"
-                                   @error('password') is-invalid @enderror" required autocomplete="new-password">
+                                   @error('password') is-invalid @enderror required autocomplete="new-password">
                             @error('password')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -35,7 +35,7 @@
                     <form action="{{ route('changeEmail') }}" method="post">
                         <div>
                             <input id="oldEmail" type="email" placeholder="Old Email" name="oldEmail"
-                                   @error('password') is-invalid @enderror" required autocomplete="new-password">
+                                   @error('password') is-invalid @enderror required>
                             @error('password')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -44,7 +44,7 @@
                         </div>
                         <div>
                             <input id="newEmail" type="email" placeholder="New email" name="newEmail"
-                                   @error('password') is-invalid @enderror" required autocomplete="new-password">
+                                   @error('password') is-invalid @enderror required>
                             @error('password')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -67,7 +67,7 @@
                     <form action="{{ route('changePassword') }}" method="post">
                         <div>
                             <input id="oldPassword" type="password" placeholder="Old password" name="oldPassword"
-                                   @error('password') is-invalid @enderror" required autocomplete="new-password">
+                                   @error('password') is-invalid @enderror required autocomplete="new-password">
                             @error('password')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -75,8 +75,8 @@
                             @enderror
                         </div>
                         <div>
-                            <input id="newPassword" type="password" placeholder="New password" name="newPassword"
-                                   @error('password') is-invalid @enderror" required autocomplete="new-password">
+                            <input id="newPassword1" type="password" placeholder="New password" name="newPassword1"
+                                   @error('password') is-invalid @enderror required autocomplete="new-password">
                             @error('password')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -84,8 +84,8 @@
                             @enderror
                         </div>
                         <div>
-                            <input id="confirmPassword" type="password" placeholder="Confirm password"
-                                   name="confirmPassword" required autocomplete="new-password">
+                            <input id="newPassword2" type="password" placeholder="Again new password"
+                                   name="newPassword2" required autocomplete="new-password">
                         </div>
                         <div>
                             <button type="submit" name="submit">Change password</button>
@@ -101,7 +101,7 @@
                     <form action="{{ route('delete') }}" method="post">
                         <div>
                             <input id="password" type="password" placeholder="Password"
-                                   @error('password') is-invalid @enderror" name="password" required
+                                   @error('password') is-invalid @enderror name="password" required
                             autocomplete="new-password">
                             @error('password')
                             <span class="invalid-feedback" role="alert">
@@ -128,14 +128,5 @@
         </div>
     </div>
 
-    <script>
-        function myFunction() {
-            var x = document.getElementById("middleNav");
-            if (x.style.display === "block") {
-                x.style.display = "none";
-            } else {
-                x.style.display = "block";
-            }
-        }
-    </script>
+    <script type="text/javascript" src="js/otherScripts.js"></script>
 @endsection

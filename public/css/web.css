@@ -255,6 +255,10 @@ table{
     color: #bbbbbb;
 
 }
+.regBox span strong {
+    color: white;
+    font-size: 10vh;
+}
 
 .regBox{
 
@@ -264,7 +268,6 @@ table{
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: black;
-    /*background-color: #818181;*/
 
     border: 5px solid #818181;
     min-height: 35vh;
@@ -311,21 +314,6 @@ table{
     scale: 1.5;
     margin: 10px;
 }
-/*Battle*/
-
-/*.battle_info{*/
-/*    width: 40%;*/
-/*    height: 5%;*/
-/*    position: absolute;*/
-/*    left: 50%;*/
-/*    top: 10%;*/
-/*    transform: translate(-50%, -50%);*/
-/*    text-align: center;*/
-/*    align-items: center;*/
-/*}*/
-/*.battle_info p {*/
-/*    font-size: 5vh;*/
-/*}*/
 
 .battle_container {
     display: grid;
@@ -408,13 +396,7 @@ table{
 }
 
 
-/*.battle_box{*/
-/*    height: 200px;*/
-/*    width: 200px;*/
-/*}*/
-
 .battle_box img{
-    /*border: 2px solid black;*/
     display: none;
     height: 200px;
     width: 200px;
@@ -535,6 +517,12 @@ table{
     top: 30%;
     transform: translate(-50%, -50%);
 }
+
+.character-container .weapons-box .slideshow-container .slide img {
+    width: 200px;
+    height: 200px;
+}
+
 .character-text{
     margin-top: 10%;
 }
@@ -590,6 +578,10 @@ table{
     top: 30%;
     transform: translate(-50%, -50%);
 }
+.weapon-container img{
+    width: 200px;
+    height: 200px;
+}
 
 .weapons-box{
     display: flex;
@@ -611,8 +603,8 @@ table{
 }
 
 .slideshow-container img{
-    max-width: 200%;
-    max-height: 200%;
+    width: 150px;
+    height: 150px;
 }
 
 
@@ -840,12 +832,10 @@ input:checked + .slider:before {
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: black;
-    /*background-color: #818181;*/
 
     border: 5px solid #818181;
     min-height: 35vh;
     min-width: 35vh;
-    /*margin-left: 3vh;*/
 
     opacity: 0.9;
     color: #818181;
@@ -892,11 +882,7 @@ input:checked + .slider:before {
     margin-left: 5%;
     margin-right: 5%;
 }
-.statistics:nth-child {
-    color: #818181;
-    font-size: 5vh;
-    background-color: rgba(17, 17, 17, 0.82);
-}
+
 
 
 li{
@@ -919,17 +905,13 @@ td{
     font-size: 2vh;
 }
 
-@media screen and (max-width: 1200px), (max-height: 700px) {
+@media screen and (max-width: 1200px), (max-height: 650px) {
 
     .sidenav{
         display: none
     }
 
-    .flex-container {
-        flex-direction: column;
-        position: center;
-        margin: 0 0 2.5vh;
-    }
+
     .icon{
         display: block;
     }
@@ -965,39 +947,32 @@ td{
         text-align: center;
     }
 
-
-
-
-
     /*Battle*/
     .battle_container {
+        display: flex;
+        justify-content:space-between;
+        flex-direction:column;
 
         text-align: center;
-        display: initial;
-        /*grid-auto-flow: column;*/
-        /*grid-column-gap: 5%;*/
-        justify-content: center;
-        /*align-items: center;*/
-        /*width: 95%;*/
-        /*height: 60%;*/
-        /*position: absolute;*/
-        /*left: 50%;*/
-        /*top: 45%;*/
         width: 60%;
-        height: 95%;
-        left: 55%;
-        top: 50%;
+        height: 87%;
+        left: 50%;
+        top: 45%;
         transform: translate(-50%, -50%);
     }
 
     .player_box{
         height: 200px;
         width: 180px;
-        margin-bottom: 30%;
+
     }
 
     .battle_player_info {
         text-align: center;
+    }
+    .battle_player_info p {
+        border: 2px solid black;
+        background-color: #bbbbbb;
     }
 
     .battle_player_profwep{
@@ -1043,12 +1018,6 @@ td{
         width: 40px;
     }
 
-
-    /*.battle_box{*/
-    /*    height: 200px;*/
-    /*    width: 200px;*/
-    /*}*/
-
     .battle_box img{
         /*border: 2px solid black;*/
         display: none;
@@ -1059,11 +1028,16 @@ td{
     .boss_box{
         height: 200px;
         width: 180px;
-        margin-top: 30%;
+
     }
 
     .battle_boss_info {
         text-align: center;
+    }
+
+    .battle_boss_info p {
+        border: 2px solid black;
+        background-color: #555555;
     }
 
     .battle_boss_profwep{
@@ -1139,17 +1113,16 @@ td{
         transform: translate(-50%, -50%);
     }
 
-
-
-
-
-
     /*Characters*/
     .character-container .slideshow-container {
         width: 60%;
     }
+    .character-container .weapons-box .slideshow-container .slide img {
+        width: 150px;
+        height: 150px;
+    }
     .character-text{
-        margin-top: 40%;
+        margin-top: 30%;
     }
     .character-container img {
         width: 200px;
@@ -1163,8 +1136,6 @@ td{
         margin-left: 25%;
         margin-right: 25%;
     }
-
-
 
     /*Weapons*/
 
@@ -1203,8 +1174,6 @@ td{
     }
 
     /*Scroll*/
-
-
     .scroll-container img{
         width: 100px;
         height: 100px;
@@ -1228,8 +1197,6 @@ td{
         padding: 1vh 1vh 1vh 1vh;
         font-size: 2vh;
     }
-
-
 }
 
 

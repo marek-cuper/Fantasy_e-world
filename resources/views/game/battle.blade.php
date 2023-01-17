@@ -38,9 +38,6 @@
 
 
     <main class="py-4">
-{{--        <div class="battle_info">--}}
-{{--            <p id="battle_info">FIGHT!</p>--}}
-{{--        </div>--}}
         <div class="battle_container">
             <div class="player_box">
 
@@ -60,42 +57,42 @@
 
                 <div class="battle_player_profwep">
                     <div id="battle_player_image" class="battle_player_image">
-                        <img src="{{$player_img_src}}">
+                        <img src="{{$player_img_src}}" alt="Player character image">
                     </div>
 
                     <div id="battle_player_weapon" class="battle_player_weapon">
-                        <img onclick="main(0)" src="{{$player_wep->value('image_path')}}">
+                        <img onclick="main(0)" src="{{$player_wep->value('image_path')}}" alt="Player weapon">
                     </div>
                 </div>
 
                 <div id="battle_player_scrolls" class="battle_player_scrolls">
                     <div class="battle_player_scroll">
-                        <img id="battle_player_scroll1" onclick="main(1)" src="{{$player_scroll1->value('image_path')}}">
+                        <img id="battle_player_scroll1" onclick="main(1)" src="{{$player_scroll1->value('image_path')}}" alt="Player scroll1">
                     </div>
                     <div class="battle_player_scroll">
-                        <img id="battle_player_scroll2" onclick="main(2)" src="{{$player_scroll2->value('image_path')}}">
+                        <img id="battle_player_scroll2" onclick="main(2)" src="{{$player_scroll2->value('image_path')}}" alt="Player scroll2">
                     </div>
                     <div class="battle_player_scroll">
-                        <img id="battle_player_scroll3" onclick="main(3)" src="{{$player_scroll3->value('image_path')}}">
+                        <img id="battle_player_scroll3" onclick="main(3)" src="{{$player_scroll3->value('image_path')}}" alt="Player scroll3">
                     </div>
                 </div>
 
                 <div id="battle_player_buffs" class="battle_player_buffs">
                     <div class="battle_player_buff">
-                        <img id="battle_player_buff1"  src="{{$player_scroll1->value('image_path')}}">
+                        <img id="battle_player_buff1"  src="{{$player_scroll1->value('image_path')}}" alt="Player scroll1">
                     </div>
                     <div class="battle_player_buff">
-                        <img id="battle_player_buff2"  src="{{$player_scroll2->value('image_path')}}">
+                        <img id="battle_player_buff2"  src="{{$player_scroll2->value('image_path')}}" alt="Player scroll2">
                     </div>
                     <div class="battle_player_buff">
-                        <img id="battle_player_buff3"  src="{{$player_scroll3->value('image_path')}}">
+                        <img id="battle_player_buff3"  src="{{$player_scroll3->value('image_path')}}" alt="Player scroll3">
                     </div>
                 </div>
             </div>
 
 
             <div class="battle_box">
-                <img id="battle_action">
+                <img id="battle_action" src="{{$player_wep->value('image_path')}}" alt="Action">
             </div>
 
             <div class="boss_box">
@@ -116,36 +113,36 @@
 
                 <div class="battle_boss_profwep">
                     <div id="battle_boss_weapon" class="battle_boss_weapon">
-                        <img src="{{$boss->value('wep_path')}}">
+                        <img src="{{$boss->value('wep_path')}}" alt="Boss weapon">
                     </div>
 
                     <div class="battle_boss_image">
-                        <img src="{{$boss->value('profile_path')}}">
+                        <img src="{{$boss->value('profile_path')}}" alt="Boss image">
                     </div>
 
                 </div>
 
                 <div id="battle_boss_scrolls" class="battle_boss_scrolls">
                     <div class="battle_boss_scroll">
-                        <img src="{{$boss->value('scroll1_path')}}">
+                        <img src="{{$boss->value('scroll1_path')}}" alt="Boss scroll1">
                     </div>
                     <div class="battle_boss_scroll">
-                        <img src="{{$boss->value('scroll2_path')}}">
+                        <img src="{{$boss->value('scroll2_path')}}" alt="Boss scroll2">
                     </div>
                     <div class="battle_boss_scroll">
-                        <img src="{{$boss->value('scroll3_path')}}">
+                        <img src="{{$boss->value('scroll3_path')}}" alt="Boss scroll3">
                     </div>
                 </div>
 
                 <div id="battle_boss_buffs" class="battle_boss_buffs">
                     <div class="battle_boss_buff">
-                        <img id="battle_boss_buff1" src="{{$player_scroll1->value('image_path')}}">
+                        <img id="battle_boss_buff1" src="{{$player_scroll1->value('image_path')}}" alt="Boss buff1">
                     </div>
                     <div class="battle_boss_buff">
-                        <img id="battle_boss_buff2" src="{{$player_scroll2->value('image_path')}}">
+                        <img id="battle_boss_buff2" src="{{$player_scroll2->value('image_path')}}" alt="Boss buff2">
                     </div>
                     <div class="battle_boss_buff">
-                        <img id="battle_boss_buff3" src="{{$player_scroll3->value('image_path')}}">
+                        <img id="battle_boss_buff3" src="{{$player_scroll3->value('image_path')}}" alt="Boss buff3">
                     </div>
                 </div>
 
@@ -155,7 +152,7 @@
         </div>
 
         <div class="endMenu" id="endMenu">
-            <img src="{{$boss->value('backg_path')}}">
+            <img src="{{$boss->value('backg_path')}}" alt="Battle background">
             <p id="endMenuText">You won battle</p>
             <form method="GET" action="{{ url('/lobby') }}">
                 @csrf
@@ -253,12 +250,10 @@
 
         function main(action){
             //0-wep, 1-scroll1, 2-scroll2, 3-scroll3
-            // textInfo.textContent = ""
 
             round++;
             showPlayerOptions(0);
             playerAction(action);
-            // showAction(img_path)
             sleepFunc(2000).then(() => {
                 clearAction();
                 showPlayerOptions(0);
@@ -484,7 +479,7 @@
                 }
                 if(scrollName === "Diary"){
                     if (playerDiaryStacks > 4){
-                        bossGetDamage(2000);
+                        bossGetDamage(2200);
                         imgPath = "images/scrolls/diary2.png"
                     }
                     playerDiaryStacks++;

@@ -9,11 +9,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-
-    {{--    <!-- Fonts -->--}}
-    {{--    <link rel="dns-prefetch" href="//fonts.gstatic.com">--}}
-    {{--    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">--}}
-
     <link rel="stylesheet" href="css/web.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -41,7 +36,9 @@
 @auth
     <div class="sidenav">
         <a href="{{ url('/home') }}">Home</a>
-        <a href="{{ url('/lobby') }}">Play</a>
+        @if(Auth::user()->character == true)
+            <a href="{{ url('/lobby') }}">Play</a>
+        @endif
         <a href="{{ url('/character') }}" >{{ __('Characters') }}</a>
         @if(Auth::user()->character == true)
             <a href="{{ route('weapon.index') }}" >{{ __('Weapon') }}</a>
@@ -60,7 +57,9 @@
 
     <div class="middleNav" id="middleNav">
         <a href="{{ url('/home') }}">Home</a>
-        <a href="{{ url('/lobby') }}">Play</a>
+        @if(Auth::user()->character == true)
+            <a href="{{ url('/lobby') }}">Play</a>
+        @endif
         <a href="{{ url('/character') }}" >{{ __('Characters') }}</a>
         @if(Auth::user()->character == true)
             <a href="{{ route('weapon.index') }}" >{{ __('Weapon') }}</a>
@@ -84,35 +83,7 @@
         @yield('content')
     </main>
 
-{{--    <div class="footer">--}}
-{{--        <div class="flex-container">--}}
-{{--            <div>--}}
-{{--                <div class="footerExplanations"><p>Player Name:</p></div>--}}
-{{--                <div class="footerValue">--}}
-{{--                    {{ Auth::user()->name }}--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            <div>--}}
-{{--                <div class="footerExplanations"><p>Weapon:</p></div>--}}
-{{--                <div class="footerValue">--}}
-{{--                    <img src="{{  \App\Models\Weapon::where('id', Auth::user()->weapon)->value('image_path') }}">--}}
-{{--                    <img src="{{  $weps->value('image_path') }}">--}}
-{{--                </div>--}}
-
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-
-    <script>
-        function myFunction() {
-            var x = document.getElementById("middleNav");
-            if (x.style.display === "block") {
-                x.style.display = "none";
-            } else {
-                x.style.display = "block";
-            }
-        }
-    </script>
+    <script type="text/javascript" src="js/otherScripts.js"></script>
 @endauth
 </body>
 </html>

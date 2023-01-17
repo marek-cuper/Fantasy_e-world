@@ -44,17 +44,10 @@
                             </div>
                         @endif
                     @endif
-                    <img class="wepsImgs" id="{{ $scroll->id }}" src="{{  $scroll->image_path }}">
+                    <img class="wepsImgs" src="{{  $scroll->image_path }}" alt="Scroll">
                     <div class="text">{{ __('Cost: ') }}{{  $scroll->cost }}</div>
                     <div class="text">{{  $scroll->info }}</div>
                 </div>
-
-
-                {{--                <div class="slide">--}}
-                {{--                    <img id="{{ $i }}" src="{{  $scro->where('id', $i)->value('image_path') }}">--}}
-                {{--                    <div class="text">{{ __('Cost: ') }}{{  $scro->where('id', $i)->value('cost') }}</div>--}}
-                {{--                    <div class="text">{{  $scro->where('id', $i)->value('info') }}</div>--}}
-                {{--                </div>--}}
 
                     <?php
                 }
@@ -67,15 +60,15 @@
         </div>
 
         <div class="scroll-box">
-            <div id="scrollSubmit" class="player_scroll_button">
+            <div class="player_scroll_button">
                 <button onclick="chooseScroll(1)">Choose 1. scroll</button>
             </div>
 
-            <div id="scrollSubmit" class="player_scroll_button">
+            <div class="player_scroll_button">
                 <button onclick="chooseScroll(2)">Choose 2. scroll</button>
             </div>
 
-            <div id="scrollSubmit" class="player_scroll_button">
+            <div class="player_scroll_button">
                 <button onclick="chooseScroll(3)">Choose 3. scroll</button>
             </div>
         </div>
@@ -84,17 +77,17 @@
         <div class="scroll-box">
             <div class="scroll-container">
                 <img id="player_scroll1_image"
-                     src="{{$scroll->where('id', $character->value('scroll1'))->value('image_path') }}">
+                     src="{{$scroll->where('id', $character->value('scroll1'))->value('image_path') }}" alt="Player scroll1">
             </div>
 
             <div class="scroll-container">
                 <img id="player_scroll2_image"
-                     src="{{$scroll->where('id', $character->value('scroll2'))->value('image_path') }}">
+                     src="{{$scroll->where('id', $character->value('scroll2'))->value('image_path') }}" alt="Player scroll2">
             </div>
 
             <div class="scroll-container">
                 <img id="player_scroll3_image"
-                     src="{{$scroll->where('id', $character->value('scroll3'))->value('image_path') }}">
+                     src="{{$scroll->where('id', $character->value('scroll3'))->value('image_path') }}" alt="Player scroll3">
             </div>
         </div>
 

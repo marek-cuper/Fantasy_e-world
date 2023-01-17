@@ -12,8 +12,7 @@
         </div>
 
         <div>
-            <img id="player_character_image"
-                 src="{{$chars->where('id', $character->value('picture'))->value('image_path') }}">
+            <img id="player_character_image" src="{{$chars->where('id', $character->value('picture'))->value('image_path') }}" alt="Your character image">
         </div>
 
 
@@ -26,16 +25,4 @@
         </form>
     </div>
 
-    <script>
-
-
-        function myFunction() {
-            var x = document.getElementById("middleNav");
-            if (x.style.display === "block") {
-                x.style.display = "none";
-            } else {
-                x.style.display = "block";
-            }
-        }
-    </script>
 @endsection

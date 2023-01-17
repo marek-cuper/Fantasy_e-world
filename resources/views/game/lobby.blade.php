@@ -10,7 +10,7 @@
 
         <div>
             <img id="player_character_image"
-                 src="{{$bosses->where('id', $character->value('level'))->value('profile_path')}}">
+                 src="{{$bosses->where('id', $character->value('level'))->value('profile_path')}}" alt="Boss image">
         </div>
 
 
@@ -26,7 +26,4 @@
 
     </div>
 
-    <script>
-
-    </script>
 @endsection

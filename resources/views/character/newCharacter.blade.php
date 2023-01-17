@@ -29,7 +29,7 @@
                     ?>
 
                 <div class="slide">
-                    <img id="{{ $i }}" src="{{  $chars->where('id', $i)->value('image_path') }}">
+                    <img id="{{ $i }}" src="{{  $chars->where('id', $i)->value('image_path') }}" alt="Character image">
                     <div class="text">{{  $chars->where('id', $i)->value('name') }}</div>
                 </div>
                     <?php
@@ -43,20 +43,6 @@
         </div>
 
         <div class="scroll-box">
-            {{--            <form method="POST" action="{{ route('createCharacter') }}">--}}
-            {{--                @csrf--}}
-            {{--                <div>--}}
-            {{--                    <input onclick="chooseCharacter()" id="name" type="text" placeholder="Name" @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>--}}
-            {{--                    @error('name')--}}
-            {{--                    <span class="invalid-feedback" role="alert">--}}
-            {{--                            <strong>{{ $message }}</strong>--}}
-            {{--                        </span>--}}
-            {{--                    @enderror--}}
-            {{--                </div>--}}
-            {{--                <div>--}}
-            {{--                    <button type="submit">Create character</button>--}}
-            {{--                </div>--}}
-            {{--            </form>--}}
             <div>
                 <div class="charInput">
                     <input id="name" type="text" placeholder="Name">
@@ -66,16 +52,6 @@
                 </div>
             </div>
         </div>
-
-
-        {{--        <div id="weaponSubmit" class="player_weapon_button">--}}
-        {{--            <button onclick="chooseCharacter()" >Create character</button>--}}
-        {{--        </div>--}}
-
-        {{--        <div class="player_weapon">--}}
-        {{--            <img id="player_character_image" src="{{  $chars->where('id', Auth::user()->character)->value('image_path') }}">--}}
-        {{--        </div>--}}
-
 
     </div>
 

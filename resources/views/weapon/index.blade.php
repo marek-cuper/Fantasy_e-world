@@ -42,7 +42,7 @@
                             </div>
                         @endif
                     @endif
-                    <img class="wepsImgs" id="{{ $wep->id }}" src="{{  $wep->image_path }}">
+                    <img class="wepsImgs" src="{{  $wep->image_path }}" alt="Weapon">
                     <div class="text">{{  $wep->info }}</div>
                 </div>
                     <?php
@@ -62,7 +62,7 @@
 
         <div class="player_weapon">
             <img id="player_weapon_image"
-                 src="{{$weps->where('id', $character->value('weapon'))->value('image_path') }}">
+                 src="{{$weps->where('id', $character->value('weapon'))->value('image_path') }}" alt="Player weapon">
         </div>
 
 
@@ -135,9 +135,6 @@
                 url: "{{ url('/changePlayabilityWeapon') }}",
                 type: "post",
                 data: {id: id},
-                // success: function(){ // What to do if we succeed
-                //     alert(id);
-                // }
             });
         }
 

@@ -80,7 +80,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $request->validate([
-            'newName' => ['required', 'string', 'max:255'],
+            'newName' => ['required', 'string','min:4', 'max:255'],
         ]);
         $try = User::where('name', $request->newName)->first();
         if($try === null){
@@ -113,16 +113,13 @@ class UserController extends Controller
                     return Redirect()->route('login');
 
                 } else {
-                    $text = 'Wrong password';
                     return Redirect()->route('profile');
                 }
 
             }else {
-                $text = 'Wrong old email';
                 return Redirect()->route('profile');
             }
         }else {
-            $text = 'Someone already use this email address';
             return Redirect()->route('profile');
         }
 
@@ -137,19 +134,17 @@ class UserController extends Controller
         if ($hasher->check($request->oldPassword, $user->password)) {
 
             $request->validate([
-                'newPassword' => 'string|min:6|confirmed',
-
+                'newPassword' => 'string|min:6|max:255|confirmed',
             ]);
 
-            if($request->newPassword == $request->confirmPassword){
-                $user->password = $hasher->make($request->newPassword);
+            if($request->newPassword1 == $request->newPassword2){
+                $user->password = $hasher->make($request->newPassword1);
                 $user->save();
                 Auth::logout();
                 return Redirect()->route('login');
             }
 
         } else {
-            $text = 'Wrong password';
             return Redirect()->route('user.profile');
         }
     }
